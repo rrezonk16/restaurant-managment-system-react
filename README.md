@@ -1,23 +1,23 @@
 # Restaurant Managment System
 
-Projekt per Lënda Laboratorike 1
+Projekt per Lï¿½nda Laboratorike 1
 
 ## Grupi
 
 - [@rrezonkrasniqi](https://www.github.com/rrezonk16)
 - [@enespaqarizi](https://github.com/YyepPo)
 
-## Ligjëruesi
+<<<<<<< HEAD
+## Ligjï¿½ruesi
 
 - can. PhD. Lamir Shkurti
-
 ## ?? Reth projektit
 
-Projekti është një aplikacion web i dizajnuar për një restorant. Do të ketë një faqe për vizitorët ku ata mund të shohin imazhe të restoranit, vendndodhjen e tij, dhe të regjistrohen për takime. Gjithashtu, vizitorët do të jenë në gjendje të shohin menunë. Sistemi do të ketë katër role të ndryshme: punëtor, përdorues, kuzhinier, dhe admin. Përveç kësaj, do të ketë një zgjedhës të tavolinave të integruar me një zgjedhës të kohës për të lehtësuar rezervimet për përdoruesit.
+Projekti ï¿½shtï¿½ njï¿½ aplikacion web i dizajnuar pï¿½r njï¿½ restorant. Do tï¿½ ketï¿½ njï¿½ faqe pï¿½r vizitorï¿½t ku ata mund tï¿½ shohin imazhe tï¿½ restoranit, vendndodhjen e tij, dhe tï¿½ regjistrohen pï¿½r takime. Gjithashtu, vizitorï¿½t do tï¿½ jenï¿½ nï¿½ gjendje tï¿½ shohin menunï¿½. Sistemi do tï¿½ ketï¿½ katï¿½r role tï¿½ ndryshme: punï¿½tor, pï¿½rdorues, kuzhinier, dhe admin. Pï¿½rveï¿½ kï¿½saj, do tï¿½ ketï¿½ njï¿½ zgjedhï¿½s tï¿½ tavolinave tï¿½ integruar me njï¿½ zgjedhï¿½s tï¿½ kohï¿½s pï¿½r tï¿½ lehtï¿½suar rezervimet pï¿½r pï¿½rdoruesit.
+=======
+## LigjÃ«ruesi
 
-## Hape projektin ne kompjuterin tuaj
-
-Beje projektin clone nga Github
+- can. PhD. Lamir Shkurti
 
 ```bash
   //frontend react code
