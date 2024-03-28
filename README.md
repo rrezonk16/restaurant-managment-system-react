@@ -1,17 +1,40 @@
-# REST API with ASP.NET 6 and MySQL
+# Restaurant Managment System
 
-ASP.NET makes it easy to build services that reach a broad range of clients, including browsers and mobile devices. With ASP.NET you use the same framework and patterns to build both web pages and services, side-by-side in the same project. In this repository, we can find the source code about implementing a Rest API for handling user data.
+Projekt per Lënda Laboratorike 1
 
-## Example screenshot of the final results 
+## Grupi
 
-![](https://res.cloudinary.com/practicaldev/image/fetch/s--KK3vhzfV--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://dev-to-uploads.s3.amazonaws.com/i/up8i0qz3ghvplbkxl2qb.png)
+- [@rrezonkrasniqi](https://www.github.com/rrezonk16)
+- [@enespaqarizi](https://github.com/YyepPo)
 
-## Tutorial:
+## Ligjëruesi
 
-[Working with web services through ASP.NET Core and DotVVM (A step by step guide)](https://dev.to/dotvvm/working-with-web-services-through-asp-net-core-and-dotvvm-a-step-by-step-guide-2le).
+- can. PhD. Lamir Shkurti
 
-## Autor
+## ?? Reth projektit
 
-Daniel Gomez Jaramillo
+Projekti është një aplikacion web i dizajnuar për një restorant. Do të ketë një faqe për vizitorët ku ata mund të shohin imazhe të restoranit, vendndodhjen e tij, dhe të regjistrohen për takime. Gjithashtu, vizitorët do të jenë në gjendje të shohin menunë. Sistemi do të ketë katër role të ndryshme: punëtor, përdorues, kuzhinier, dhe admin. Përveç kësaj, do të ketë një zgjedhës të tavolinave të integruar me një zgjedhës të kohës për të lehtësuar rezervimet për përdoruesit.
 
-[twitter.com/esDanielGomez](https://twitter.com/esDanielGomez)
+## Hape projektin ne kompjuterin tuaj
+
+Beje projektin clone nga Github
+
+```bash
+  //frontend react code
+    git clone https://github.com/rrezonk16/restaurant-managment-system-react
+    npm install
+    npm start
+```
+
+```bash
+  //backend .net code
+    git clone https://github.com/rrezonk16/Restaurant_management_system_backend
+```
+
+## Tech Stack
+
+**Frontend:** ReactJs and TailwindCSS
+
+**Backend:** .NET Core Web API
+
+**Database:** MySQL

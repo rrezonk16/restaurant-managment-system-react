@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\ASP.NET_WebAPI6.props" />
-</Project>
