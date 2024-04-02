@@ -52,4 +52,22 @@
     background: #111;
   }
   
+  html {
+    scroll-snap-type: y mandatory;
+}
+#section1{
+  scroll-snap-align: start;
 
+}
+#section2{
+  scroll-snap-align: start;
+
+}
+#section3{
+  scroll-snap-align: start;
+
+}
+#section4{
+  scroll-snap-align: start;
+
+}

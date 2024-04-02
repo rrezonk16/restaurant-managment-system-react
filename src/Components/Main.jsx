@@ -16,123 +16,64 @@ const scrollToSection2 = () => {
 const Main = () => {
   return (
     <div>
-      <div className="h-screen full-width bg-gray-900 flex flex-col justify-center items-center">
+      <div className="h-screen full-width bg-gray-900 flex flex-col justify-center items-center"        id="section1"
+>
         <img src={logo} alt="eatwell" className="py-4 " />
-          <span onClick={scrollToSection2} className="arrow"></span>
+        <span onClick={scrollToSection2} className="arrow"></span>
       </div>
-      <Navbar/>
+      <Navbar />
       <div
-        className="h-screen full-width bg-blue-900 flex flex-col justify-center items-center"
+        className="h-screen full-width bg-blue-900 flex flex-col pt-24"
         id="section2"
       >
-        <div class="container mx-auto px-5 py-2 ">
-          <div class="-m-1 flex flex-wrap md:-m-2">
-            <div class="flex w-1/2 flex-wrap">
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(70).webp"
-                />
-              </div>
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp"
-                />
-              </div>
-              <div class="w-full p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                />
-              </div>
-            </div>
-            <div class="flex w-1/2 flex-wrap">
-              <div class="w-full p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp"
-                />
-              </div>
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(75).webp"
-                />
-              </div>
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp"
-                />
-              </div>
-            </div>
+        <div className="container ">
+          <div className="flex flex-row w-full justify-between">
+            <span className=" text-white text-4xl font-bold">
+              Prishtina, Kosovo
+            </span>
+          </div>
+          <div>
+            <span className="text-white text-xl italic font-bold">
+              Located in the center of Prishtina the Capital City of Kosovo.
+            </span>
           </div>
         </div>
       </div>
 
-
-
       <div
-        className="h-screen full-width bg-red-900 flex flex-col justify-center items-center"
+        className="h-screen full-width bg-red-900 flex flex-col  pt-24 "
         id="section3"
       >
-        <div class="container mx-auto px-5 py-2 ">
-          <div class="-m-1 flex flex-wrap md:-m-2">
-            <div class="flex w-1/2 flex-wrap">
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(70).webp"
-                />
-              </div>
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp"
-                />
-              </div>
-              <div class="w-full p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                />
-              </div>
-            </div>
-            <div class="flex w-1/2 flex-wrap">
-              <div class="w-full p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp"
-                />
-              </div>
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(75).webp"
-                />
-              </div>
-              <div class="w-1/2 p-1 md:p-2">
-                <img
-                  alt="gallery"
-                  class="block h-full w-full rounded-lg object-cover object-center"
-                  src="https://tecdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp"
-                />
-              </div>
-            </div>
+        <div className="container ">
+          <div className="flex flex-row w-full justify-between">
+            <span className=" text-white text-4xl font-bold">
+              Tirana, Albania
+            </span>
           </div>
-        </div>
+          <div>
+            <span className="text-white text-xl italic font-bold">
+              Located in the center of *** the Capital City of ***.
+            </span>
+          </div>
+        </div>{" "}
+      </div>
+
+      <div
+        className="h-screen full-width  bg-yellow-700 flex flex-col  pt-24"
+        id="section4"
+      >
+        <div className="container ">
+          <div className="flex flex-row w-full justify-between">
+            <span className=" text-white text-4xl font-bold">
+              Skopje, North Macedonia
+            </span>
+          </div>
+          <div>
+            <span className="text-white text-xl italic font-bold">
+              Located in the center of *** the Capital City of ***.
+            </span>
+          </div>
+        </div>{" "}
       </div>
     </div>
   );
