@@ -12,3 +12,18 @@ C:\Users\Rrezon\Desktop\Database\obj\Debug\net6.0\refint\Database.dll
 C:\Users\Rrezon\Desktop\Database\obj\Debug\net6.0\Database.pdb
 C:\Users\Rrezon\Desktop\Database\obj\Debug\net6.0\Database.genruntimeconfig.cache
 C:\Users\Rrezon\Desktop\Database\obj\Debug\net6.0\ref\Database.dll
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\bin\Debug\net6.0\Database.deps.json
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\bin\Debug\net6.0\Database.runtimeconfig.json
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\bin\Debug\net6.0\Database.dll
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\bin\Debug\net6.0\Database.pdb
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.csproj.AssemblyReference.cache
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.GeneratedMSBuildEditorConfig.editorconfig
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.AssemblyInfoInputs.cache
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.AssemblyInfo.cs
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.csproj.CoreCompileInputs.cache
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.sourcelink.json
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.dll
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\refint\Database.dll
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.pdb
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\Database.genruntimeconfig.cache
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Database\obj\Debug\net6.0\ref\Database.dll

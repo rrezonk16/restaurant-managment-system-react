@@ -18,16 +18,14 @@ namespace Database.Repository
             _context = context;
         }
 
-        public async void Add(T entity)
+        public void Add(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            _context.Add(entity);
         }
         public IQueryable<T> GetQuery()
         {
             return _context.Set<T>();
         }
-
-
 
         public async Task Delete(int id, CancellationToken token)
         {
@@ -56,6 +54,11 @@ namespace Database.Repository
         public void Update(T entity)
         {
             _context.Set<T>().Update(entity);
+        }
+
+        public async Task<Users> CheckIfExistsInDataBase(string name, CancellationToken cancellationToken)
+        {
+            return await _context.Set<Users>().FirstOrDefaultAsync(u => u.Name == name, cancellationToken);
         }
     }
 }

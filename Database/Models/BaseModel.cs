@@ -10,17 +10,23 @@ namespace Database.Models
 {
     public abstract class BaseModel
     {
+        protected BaseModel()
+        {
+            CreatedAt = DateTime.Now;
+            UpdatedtAt = DateTime.Now; 
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
         
         [Required]
-        public DateTime UpdatedtAt { get; set; }
+        public DateTime? UpdatedtAt { get; set; }
 
         [Required]
-        public string Status { get; set; }
+        public string? Status { get; set; }
     }
 }

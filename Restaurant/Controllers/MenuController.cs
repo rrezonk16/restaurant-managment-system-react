@@ -17,10 +17,8 @@ namespace Restaurant.Controllers
             _repository = repository;
         }
 
-
         [HttpGet]
         [Route("[action]/{id}")]
-
         public async Task<Menu> GetMenu(int id, CancellationToken token)
         {
             return await _repository.Get(id, token);
@@ -33,8 +31,6 @@ namespace Restaurant.Controllers
         {
             return _repository.GetAll();
         }
-
     }
-
 }
  

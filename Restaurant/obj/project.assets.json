@@ -4600,19 +4600,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rrezon\\.nuget\\packages\\": {}
+    "C:\\Users\\enesp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rrezon\\Desktop\\Restaurant_Back\\Restaurant\\Restaurant.csproj",
+      "projectUniqueName": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Restaurant.csproj",
       "projectName": "Restaurant",
-      "projectPath": "C:\\Users\\Rrezon\\Desktop\\Restaurant_Back\\Restaurant\\Restaurant.csproj",
-      "packagesPath": "C:\\Users\\Rrezon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rrezon\\Desktop\\Restaurant_Back\\Restaurant\\obj\\",
+      "projectPath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Restaurant.csproj",
+      "packagesPath": "C:\\Users\\enesp\\.nuget\\packages\\",
+      "outputPath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Rrezon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\enesp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4626,8 +4626,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Rrezon\\Desktop\\Restaurant_Back\\Database\\Database.csproj": {
-              "projectPath": "C:\\Users\\Rrezon\\Desktop\\Restaurant_Back\\Database\\Database.csproj"
+            "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Database.csproj": {
+              "projectPath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Database.csproj"
             }
           }
         }
