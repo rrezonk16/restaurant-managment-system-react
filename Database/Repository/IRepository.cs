@@ -17,7 +17,5 @@ namespace Database.Repository
         void Update(T entity);
         Task Delete(int id, CancellationToken token);
         Task SaveAsync(CancellationToken token);
-        Task<Users> CheckIfExistsInDataBase(string name, CancellationToken cancellationToken);
-
     }
 }

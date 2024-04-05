@@ -1,5 +1,7 @@
 ﻿using Database.Models;
 using Restaurant.DTOs;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Restaurant.Mappings
 {
@@ -7,6 +9,17 @@ namespace Restaurant.Mappings
     {
         public static Users UserDTOToModel(UserDTO userDTO)
         {
+            string password = userDTO.Password;
+
+            // Generate a salt
+            byte[] salt = GenerateSalt();
+
+            // Hash the password with the salt
+            byte[] hashedPassword = HashPassword(password, salt);
+
+            // Convert byte array to base64 string for storage
+            string hashedPasswordBase64 = Convert.ToBase64String(hashedPassword);
+
             return new Users
             {
                 Name = userDTO.Name,
@@ -14,8 +27,33 @@ namespace Restaurant.Mappings
                 Email = userDTO.Email,
                 Birthday = userDTO.Birthday,
                 PhoneNumber = userDTO.PhoneNumber,
-                Password = userDTO.Password,
+                Password = hashedPasswordBase64,
             };
+        }
+
+        private static byte[] GenerateSalt()
+        {
+            byte[] salt = new byte[32];
+            using (var rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(salt);
+            }
+            return salt;
+        }
+
+        // Function to hash the password with the given salt
+        private static byte[] HashPassword(string password, byte[] salt)
+        {
+            using (var sha256 = new SHA256Managed())
+            {
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+                byte[] saltedPassword = new byte[passwordBytes.Length + salt.Length];
+                Buffer.BlockCopy(passwordBytes, 0, saltedPassword, 0, passwordBytes.Length);
+                Buffer.BlockCopy(salt, 0, saltedPassword, passwordBytes.Length, salt.Length);
+
+                return sha256.ComputeHash(saltedPassword);
+            }
         }
     }
 }
+

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xO9orzyio49lI9+ihsIKha1a5kjgGYIH1DrPGX0Oso+zZSWaemMK71ZiuPpctnBCwpYcHbw0SKgT2zgLZO893w==",
+  "dgSpecHash": "0/49/AMRETgsTjY44uxK/y+kg66U6Kxe/KK0UFQTvQnEcYVxlVQlb8kgRs5AvJwRfJHrCsszP4UJuIjVvifYEA==",
   "success": true,
   "projectFilePath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Restaurant.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\enesp\\.nuget\\packages\\k4os.compression.lz4\\1.3.5\\k4os.compression.lz4.1.3.5.nupkg.sha512",
     "C:\\Users\\enesp\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.5\\k4os.compression.lz4.streams.1.3.5.nupkg.sha512",
     "C:\\Users\\enesp\\.nuget\\packages\\k4os.hash.xxhash\\1.0.8\\k4os.hash.xxhash.1.0.8.nupkg.sha512",
+    "C:\\Users\\enesp\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.28\\microsoft.aspnetcore.authentication.jwtbearer.6.0.28.nupkg.sha512",
     "C:\\Users\\enesp\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\enesp\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\enesp\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.5\\microsoft.data.sqlclient.5.1.5.nupkg.sha512",

@@ -55,10 +55,5 @@ namespace Database.Repository
         {
             _context.Set<T>().Update(entity);
         }
-
-        public async Task<Users> CheckIfExistsInDataBase(string name, CancellationToken cancellationToken)
-        {
-            return await _context.Set<Users>().FirstOrDefaultAsync(u => u.Name == name, cancellationToken);
-        }
     }
 }

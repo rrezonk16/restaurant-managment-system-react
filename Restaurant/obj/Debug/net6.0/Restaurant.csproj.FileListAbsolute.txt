@@ -219,3 +219,4 @@ D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Restaurant\obj\D
 D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Restaurant\obj\Debug\net6.0\Restaurant.pdb
 D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Restaurant\obj\Debug\net6.0\Restaurant.genruntimeconfig.cache
 D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Restaurant\obj\Debug\net6.0\ref\Restaurant.dll
+D:\Viti2\Semestri 4\Lab 1 - Project\restaurant-managment-system\Restaurant\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
