@@ -23,22 +23,21 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         });
 });
 
-
-
-builder.Services.AddControllers();
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
-builder.Services.AddScoped<IUserService, UserService>();
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
+                      builder =>
                       {
-                          policy.AllowAnyOrigin(); // Allowing requests from any origin
+                          builder.WithOrigins("http://localhost:3000")
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
                       });
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddControllers();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -53,24 +52,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
     };
-
-}); 
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseCors(MyAllowSpecificOrigins);
-
 app.UseHttpsRedirection();
-
+app.UseCors(MyAllowSpecificOrigins); // Enable CORS
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
