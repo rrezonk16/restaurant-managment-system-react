@@ -22,7 +22,9 @@ const FoodMenu = () => {
     // Call the fetchMenus function
     fetchMenus();
   }, []); // Empty dependency array ensures the effect runs only once on component mount
-
+  useEffect(() => {
+    document.title = 'Menu';
+  }, []);  
   return (
     <div class="container mx-auto bg-white">
   <h2 class="text-2xl font-bold mb-4">Menus</h2>

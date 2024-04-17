@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import logo_sm from "../Images/logo_sm.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [isActive, setisActive] = useState(false);
+  const navigate= useNavigate();
 
-  const logintoken = localStorage.getItem("LoggedIn");
+  const role = localStorage.getItem("role");
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   const checkUser = () => {
-    if (logintoken === "true") {
+    if (role === "admin") {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -26,11 +27,14 @@ const Navbar = () => {
   }, []);
 
   const checkURL = (substring) => {
-    // Get the current URL
-
-    // Check if the URL contains the specified substring
     return currentURL.includes(substring);
   };
+
+  const logout =()=>{
+    localStorage.clear();
+    navigate("/login")
+  }
+
 
   return (
     <nav
@@ -133,7 +137,7 @@ const Navbar = () => {
                 </a>
               </li>
             ) : (
-              <li>
+              <li onClick={logout}>
                 <p className=" cursor-pointer block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                   Logout
                 </p>

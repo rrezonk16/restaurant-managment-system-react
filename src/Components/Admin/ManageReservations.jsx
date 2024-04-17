@@ -2,7 +2,9 @@ import React from 'react'
 
 const ManageReservations = () => {
   return (
-    <div>ManageReservations</div>
+    <div>
+      Manage 
+    </div>
   )
 }
 

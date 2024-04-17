@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../Images/logo.png";
 import LemonHalf from "../Error/Lemonhalf.png";
 import LemonCerek from "../Error/LemonCerek.png";
+import axios from "axios"; // Import Axios
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -20,19 +22,47 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+ 
+ const navigate = useNavigate();
+  const handleSubmit = async (e) => { // Make the function asynchronous
     e.preventDefault();
-    console.log(formData); // Logging the form data
-  };
+    const { firstName, lastName, phoneNumber, email, password } = formData;
+    const birthday = new Date().toISOString(); // Current date and time
 
+    // Format the data
+    const formattedData = {
+      name: firstName,
+      surname: lastName,
+      email,
+      phoneNumber,
+      password,
+      birthday
+    };
+
+    try {
+      // Send POST request using Axios
+      const response = await axios.post("https://localhost:7046/api/User/Register", formattedData);
+      console.log("Registration successful:", response);
+        if(response.status === 200){
+          navigate("/")
+
+        }
+    } catch (error) {
+      console.error("Registration failed:", error);
+      // You can handle registration failure here
+    }
+  };
+  useEffect(() => {
+    document.title = 'Register';
+  }, []);  
   return (
     <div className="bg-blue-900 h-screen flex flex-col justify-center items-center relative">
       <div className="flex flex-col items-center">
         <img src={Logo} alt="Logo" className="w-96 mb-4 z-50" />
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg p-8 shadow-lg text-center  z-50">
-        <h1 className="text-center text-2xl mb-7">Register</h1>
+      <form onSubmit={handleSubmit} className="bg-white rounded-lg px-8 pb-2 pt-4 shadow-lg text-center  z-50">
+        <h1 className="text-center text-2xl mb-2">Register</h1>
         <div className="mb-4">
           <label htmlFor="firstName" className="block text-gray-700 text-sm font-bold mb-2">
             First Name
