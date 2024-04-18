@@ -19,7 +19,6 @@ namespace Restaurant.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IRepository<Users> _repository;
@@ -54,6 +53,31 @@ namespace Restaurant.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        public void DeleteUser(int id,CancellationToken cancellationToken)
+        {
+            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
+
+            string query = "Delete FROM Users WHERE id = @id";
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(query,sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@id", id);
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
+        [HttpPut("update-user-by-id/{id}")]
+        public IActionResult UpdateUser(int id,[FromBody]UserDTO userDTO, CancellationToken cancellationToken)
+        {
+            var book = _userService.UpdateUser(id, userDTO);
+            return Ok(book);
+        }
+       
         [AllowAnonymous]
         [HttpPost]
         [Route("[action]")]

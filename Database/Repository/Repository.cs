@@ -27,13 +27,10 @@ namespace Database.Repository
             return _context.Set<T>();
         }
 
-        public async Task Delete(int id, CancellationToken token)
+        public void Delete(int id, CancellationToken token)
         {
-            var entity = await Get(id, token);
-            if (entity != null)
-            {
-                _context.Set<T>().Remove(entity);
-            }
+            var enetity = _context.Set<T>().FirstOrDefault(f => f.Id == id);
+            _context.Remove(enetity);
         }
 
         public async Task<T?> Get(int id, CancellationToken token)
@@ -55,5 +52,11 @@ namespace Database.Repository
         {
             _context.Set<T>().Update(entity);
         }
+
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
+
     }
 }

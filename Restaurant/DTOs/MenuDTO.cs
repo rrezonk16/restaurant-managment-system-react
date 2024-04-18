@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace Restaurant.DTOs
 {
-    internal class MenuDTO
+    public class MenuDTO
     {
         [Required]
         public string Name { get; set; }
-
         [Required]
         public string Description { get; set; }
-
+      
         public int ChefId { get; set; }  
 
     }

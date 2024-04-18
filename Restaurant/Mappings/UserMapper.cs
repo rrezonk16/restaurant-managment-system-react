@@ -11,13 +11,10 @@ namespace Restaurant.Mappings
         {
             string password = userDTO.Password;
 
-            // Generate a salt
             byte[] salt = GenerateSalt();
 
-            // Hash the password with the salt
             byte[] hashedPassword = HashPassword(password, salt);
 
-            // Convert byte array to base64 string for storage
             string hashedPasswordBase64 = Convert.ToBase64String(hashedPassword);
 
             return new Users
@@ -40,8 +37,6 @@ namespace Restaurant.Mappings
             }
             return salt;
         }
-
-        // Function to hash the password with the given salt
         private static byte[] HashPassword(string password, byte[] salt)
         {
             using (var sha256 = new SHA256Managed())

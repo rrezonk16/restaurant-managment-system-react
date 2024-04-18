@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Database.Repository
 {
     public interface IRepository<T> where T : BaseModel
@@ -15,7 +16,8 @@ namespace Database.Repository
 
         void Add(T entity);
         void Update(T entity);
-        Task Delete(int id, CancellationToken token);
+        void Delete(int id,CancellationToken cancellation);
         Task SaveAsync(CancellationToken token);
+        void Save();
     }
 }
