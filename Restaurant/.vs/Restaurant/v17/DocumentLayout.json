@@ -1,25 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\",
+  "WorkspaceRootPath": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|c:\\users\\rrezon\\source\\repos\\restaurant-managment-system\\restaurant\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|c:\\users\\rrezon\\source\\repos\\restaurant-managment-system\\restaurant\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|c:\\users\\rrezon\\source\\repos\\restaurant-managment-system\\restaurant\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|c:\\users\\rrezon\\source\\repos\\restaurant-managment-system\\restaurant\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|c:\\users\\rrezon\\source\\repos\\restaurant-managment-system\\restaurant\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -30,74 +30,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 251,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Program.cs",
+              "ToolTip": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAAAEcAAAAXAAAA",
+              "ViewState": "AQIAACoAAAAAAAAAAAAkwC0AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-05T09:17:49.923Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\appsettings.json",
+              "ToolTip": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAB6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-05T19:00:31.678Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-05T19:00:31.678Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\UserService.cs",
+              "DocumentMoniker": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Services\\UserService.cs",
               "RelativeToolTip": "Services\\UserService.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAYwB4AAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-05T09:11:36.102Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-05T09:11:36.102Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "IUserService.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\IUserService.cs",
+              "DocumentMoniker": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Services\\IUserService.cs",
               "RelativeDocumentMoniker": "Services\\IUserService.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\IUserService.cs",
+              "ToolTip": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Services\\IUserService.cs",
               "RelativeToolTip": "Services\\IUserService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-05T09:10:52.923Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-05T09:10:52.923Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Restaurant\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAADkAAAAAAAAAAAAqwD0AAAB4AAAA",
+              "ViewState": "AQIAADsAAAAAAAAAAAA+wEQAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-05T08:57:07.225Z",
               "EditorCaption": ""

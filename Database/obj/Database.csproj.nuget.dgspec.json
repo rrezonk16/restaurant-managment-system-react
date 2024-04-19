@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Database.csproj": {}
+    "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Database\\Database.csproj": {}
   },
   "projects": {
-    "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Database.csproj": {
+    "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Database\\Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Database.csproj",
+        "projectUniqueName": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Database\\Database.csproj",
         "projectName": "Database",
-        "projectPath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Database.csproj",
-        "packagesPath": "C:\\Users\\enesp\\.nuget\\packages\\",
-        "outputPath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\obj\\",
+        "projectPath": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Database\\Database.csproj",
+        "packagesPath": "C:\\Users\\Rrezon\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rrezon\\source\\repos\\restaurant-managment-system\\Database\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\enesp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Rrezon\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,20 +77,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.28, 6.0.28]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.28, 6.0.28]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.28, 6.0.28]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
