@@ -53,7 +53,7 @@ namespace Restaurant.Controllers
             return Ok();
         }
 
-        [HttpDelete("delete-user-by-id/{id}")]
+        [HttpDelete]
         public void DeleteUser(int id,CancellationToken cancellationToken)
         {
             string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
