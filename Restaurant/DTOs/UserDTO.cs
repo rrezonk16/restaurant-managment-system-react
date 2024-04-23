@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,9 @@ namespace Restaurant.DTOs
         public DateTime Birthday { get; set; }
 
         public int? RoleId { get; set; } 
+
+        public String? Status { get; set; }
+        public DateTime ContractDueDate { get; set; }
     }
 }
  

@@ -7,6 +7,7 @@ using Restaurant.DTOs;
 using Restaurant.Services;
 using System.Data.Entity;
 using ZstdSharp.Unsafe;
+using Microsoft.Data.SqlClient;
 
 namespace Restaurant.Controllers
 {
@@ -37,19 +38,37 @@ namespace Restaurant.Controllers
             return Ok();
         }
 
-        /*[HttpDelete]
-        [Route("[action]")]
-        public async Task<IActionResult> DeleteMenu(int id,CancellationToken cancellationToken)
+        [HttpDelete("delete-menu-by-id/{id}")]
+        public void DeleteMenu(int id)
         {
-            await _menuService.DeleteMenu(id, cancellationToken);
-            return Ok();
-        }*/
+            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
+
+            string query = "Delete FROM Menu WHERE id = @id";
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@id", id);
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+                }
+            }
+        }
 
         [HttpGet]
         [Route("[action]")]
         public IEnumerable<Menu> GetMenus()
         {
             return _repository.GetAll();
+        }
+
+        [HttpPut("update-menu-by-id/{id}")]
+        public IActionResult UpdateMenu(int id, [FromBody] MenuDTO menuDTO)
+        {
+            var menu = _menuService.UpdateMenu(id, menuDTO);
+            return Ok(menu);
         }
     }
 }

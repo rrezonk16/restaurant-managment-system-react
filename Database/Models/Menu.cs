@@ -15,6 +15,8 @@ namespace Database.Models
 
         public int ChefId { get; set; }  // Foreign key property
 
+        public string? Status { get; set; }
+
         /*[ForeignKey("ChefId")]
         public Users User { get; set; }  // Navigation property*/
     }

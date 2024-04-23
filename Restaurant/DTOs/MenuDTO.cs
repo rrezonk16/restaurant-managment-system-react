@@ -16,6 +16,8 @@ namespace Restaurant.DTOs
       
         public int ChefId { get; set; }  
 
+        public string? Status { get; set; }
+
     }
 }
  

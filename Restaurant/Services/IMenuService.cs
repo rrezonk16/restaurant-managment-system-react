@@ -7,5 +7,6 @@ namespace Restaurant.Services
     {
         Task RegisterMenu(MenuDTO menuDTO,CancellationToken cancellation);
         Task DeleteMenu(int Id, CancellationToken cancellationToken);
+        Menu UpdateMenu(int id, MenuDTO menuDTO);
     }
 }
