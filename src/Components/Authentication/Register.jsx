@@ -40,16 +40,16 @@ const Register = () => {
     };
 
     try {
-      // Send POST request using Axios
       const response = await axios.post("https://localhost:7046/api/User/Register", formattedData);
       console.log("Registration successful:", response);
         if(response.status === 200){
+          localStorage.setItem('role', 'admin');
+
           navigate("/")
 
         }
     } catch (error) {
       console.error("Registration failed:", error);
-      // You can handle registration failure here
     }
   };
   useEffect(() => {

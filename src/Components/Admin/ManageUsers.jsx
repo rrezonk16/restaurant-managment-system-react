@@ -181,7 +181,7 @@ const ManageUsers = () => {
                       <td class="px-4 py-3">{user.name}</td>
                       <td class="px-4 py-3">{user.surname}</td>
                       <td class="px-4 py-3">{user.email}</td>
-                      <td class="px-4 py-3">/</td>
+                      <td class="px-4 py-3">{user.phoneNumber}</td>
                       <td class="px-4 py-3">{user.status}</td>
                       <td class="px-4 py-3 flex items-center justify-end">
                         <button

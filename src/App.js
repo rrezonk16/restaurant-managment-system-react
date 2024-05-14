@@ -5,12 +5,7 @@ import Error from "./Components/Error/Error";
 import Login from "./Components/Authentication/Login";
 import ViewReservation from "./Components/Reservations/ViewReservation";
 import Register from "./Components/Authentication/Register";
-import ManageEmployees from "./Components/Admin/ManageEmployees";
-import ManageMenu from "./Components/Admin/ManageMenu";
-import ManageReservations from "./Components/Admin/ManageReservations";
-import ManageOrders from "./Components/Admin/ManageOrders";
-import ManageSales from "./Components/Admin/ManageSales";
-import ManageFranchise from "./Components/Admin/ManageFranchise";
+
 import Panel from "./Components/Admin/Panel";
 import FoodMenu from "./Components/Menu/FoodMenu";
 
@@ -40,31 +35,7 @@ const routes = [
     path: "/Reserve",
     element: <MakeReservation/>
   },
-  {
-    path: "/Admin/Employees",
-    element: <ManageEmployees/>
-  },
-  {
-    path: "/Admin/Menu",
-    element: <ManageMenu/>
-  },
-  {
-    path: "/Admin/Franchise",
-    element: <ManageFranchise/>
-  },
-  {
-    path: "/Admin/Orders",
-    element: <ManageOrders/>
-  },
-  {
-    path: "/Admin/Reservations",
-    element: <ManageReservations/>
-  },
-    {
-    path: "/Admin/Sales",
-    element: <ManageSales/>
-  },
-    {
+  localStorage.getItem('role') === 'admin' && {
     path: "/Admin",
     element: <Panel/>
   },
