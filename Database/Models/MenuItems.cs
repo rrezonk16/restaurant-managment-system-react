@@ -10,11 +10,14 @@ namespace Database.Models
         public string Name { get; set; }
 
         [Required]
-        public string Ingredients { get; set; }
+        public string Ingredients { get; set; } 
 
-        public int MenuID { get; set; } 
+        public int Id { get; set; }
 
-        [ForeignKey("MenuID")]
+        [Required]
+        public int MenuID { get; set; }
+
+        [ForeignKey("Id")]
         public Menu Menu { get; set; }  
     }
 }

@@ -5,7 +5,6 @@ using Database.Repository;
 using Database.Models;
 using Restaurant.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Data.Entity.ModelConfiguration.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -38,6 +37,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMenuService,MenuService>();
+builder.Services.AddScoped<IOrderService,OrderService>();
+builder.Services.AddScoped<IMenuItems,MenuItemsService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

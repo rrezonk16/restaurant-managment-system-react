@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.DTOs;
 using Restaurant.Services;
-using System.Data.Entity;
 using ZstdSharp.Unsafe;
 using Microsoft.Data.SqlClient;
 
