@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Models
 {
-    public class Restaurant : BaseModel
+    public class Restaurants : BaseModel
     {
         [Required]
         public string Name { get; set; }
@@ -12,11 +12,14 @@ namespace Database.Models
         [Required]
         public string Address { get; set; }
 
+        [Required]
+        public string OpenHours { get; set; }
+
         [ForeignKey("Manager")]
         public int? ManagerId { get; set; }
         public Users Manager { get; set; }
 
-        [Required]
-        public string OpenHours { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
+
     }
 }

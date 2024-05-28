@@ -3,27 +3,23 @@
   "WorkspaceRootPath": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\controllers\\menuitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:controllers\\menuitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:controllers\\tablecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:controllers\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\services\\menuitemsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:services\\menuitemsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\services\\tableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:services\\tableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5E4B3C7D-A0F0-4634-92E9-49071288ED99}|..\\Database\\Database.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\database\\models\\menuitems.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\services\\itableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:services\\itableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\restaurant\\services\\menuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06231A33-423D-4D48-A878-B9AF51945F01}|Restaurant.csproj|solutionrelative:services\\menuservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5E4B3C7D-A0F0-4634-92E9-49071288ED99}|..\\Database\\Database.csproj|d:\\viti2\\semestri 4\\lab 1 - project\\restaurant-managment-system\\database\\models\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -33,94 +29,81 @@
       "DocumentGroups": [
         {
           "DockedWidth": 332,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 507,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "Controllers\\OrderController.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "Controllers\\OrderController.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAYwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T19:28:52.289Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MenuItemController.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\MenuItemController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MenuItemController.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\MenuItemController.cs",
-              "RelativeToolTip": "Controllers\\MenuItemController.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAUwC0AAAAmAAAA",
+              "Title": "TableController.cs",
+              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\TableController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TableController.cs",
+              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\TableController.cs",
+              "RelativeToolTip": "Controllers\\TableController.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAzwC0AAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T19:27:32.087Z",
+              "WhenOpened": "2024-05-28T09:22:08.349Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MenuController.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\MenuController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MenuController.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\MenuController.cs",
-              "RelativeToolTip": "Controllers\\MenuController.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAACcAAAAAAAAA",
+              "Title": "TableService.cs",
+              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\TableService.cs",
+              "RelativeDocumentMoniker": "Services\\TableService.cs",
+              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\TableService.cs",
+              "RelativeToolTip": "Services\\TableService.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwCYAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T19:21:11.345Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MenuItems.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Models\\MenuItems.cs",
-              "RelativeDocumentMoniker": "..\\Database\\Models\\MenuItems.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Models\\MenuItems.cs",
-              "RelativeToolTip": "..\\Database\\Models\\MenuItems.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T18:54:06.603Z",
+              "WhenOpened": "2024-05-28T09:18:04.405Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "MenuItemsService.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\MenuItemsService.cs",
-              "RelativeDocumentMoniker": "Services\\MenuItemsService.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\MenuItemsService.cs",
-              "RelativeToolTip": "Services\\MenuItemsService.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwBUAAAA3AAAA",
+              "Title": "ITableService.cs",
+              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\ITableService.cs",
+              "RelativeDocumentMoniker": "Services\\ITableService.cs",
+              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\ITableService.cs",
+              "RelativeToolTip": "Services\\ITableService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T18:52:24.942Z",
+              "WhenOpened": "2024-05-28T09:15:33.575Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 332,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Table.cs",
+              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Models\\Table.cs",
+              "RelativeDocumentMoniker": "..\\Database\\Models\\Table.cs",
+              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Database\\Models\\Table.cs",
+              "RelativeToolTip": "..\\Database\\Models\\Table.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-28T09:20:59.294Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MenuService.cs",
-              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\MenuService.cs",
-              "RelativeDocumentMoniker": "Services\\MenuService.cs",
-              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Services\\MenuService.cs",
-              "RelativeToolTip": "Services\\MenuService.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAQwCMAAAAJAAAA",
+              "DocumentIndex": 1,
+              "Title": "MenuController.cs",
+              "DocumentMoniker": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\MenuController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MenuController.cs",
+              "ToolTip": "D:\\Viti2\\Semestri 4\\Lab 1 - Project\\restaurant-managment-system\\Restaurant\\Controllers\\MenuController.cs",
+              "RelativeToolTip": "Controllers\\MenuController.cs",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwEEAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-27T18:52:14.129Z",
+              "WhenOpened": "2024-05-28T09:28:55.249Z",
               "EditorCaption": ""
             }
           ]
