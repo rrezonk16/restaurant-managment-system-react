@@ -22,7 +22,10 @@ namespace Database.Context
 
             modelBuilder.Entity<Menu>();
 
-            modelBuilder.Entity<Users>();
+            modelBuilder.Entity<Users>()
+           .HasMany(u => u.Orders)
+           .WithOne(o => o.User)
+           .HasForeignKey(o => o.UserId);
 
             modelBuilder.Entity<Users>()
             .HasOne(u => u.Role)

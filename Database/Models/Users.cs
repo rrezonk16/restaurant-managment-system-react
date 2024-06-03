@@ -32,5 +32,8 @@ namespace Database.Models
 
         [Column(TypeName = "Date")]
         public DateTime? ContractDueDate { get; set; }
+
+        public ICollection<Orders> Orders { get; set; }
+
     }
 }
