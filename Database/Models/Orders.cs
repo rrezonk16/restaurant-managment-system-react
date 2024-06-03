@@ -12,8 +12,9 @@ namespace Database.Models
         [Required]
         public string Status { get; set; }
 
-       public int ItemsID { get; set; }
+        public ICollection<MenuItems> MenuItems { get; set; }
 
-        //public int TableId { get; set; }
+        public int TableId { get; set; }
+        public Table Table { get; set; }
     }
 }

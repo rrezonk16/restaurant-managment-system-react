@@ -21,9 +21,23 @@ namespace Database.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Menu>();
+
             modelBuilder.Entity<Users>();
-            modelBuilder.Entity<Roles>();
-            modelBuilder.Entity<Orders>();
+
+            modelBuilder.Entity<Users>()
+            .HasOne(u => u.Role)
+            .WithMany(r => r.Users)
+            .HasForeignKey(u => u.RoleId);
+
+            modelBuilder.Entity<Orders>()
+            .HasMany(o => o.MenuItems)
+            .WithOne(m => m.Orders)
+            .HasForeignKey(m => m.OrdersId);
+
+            modelBuilder.Entity<Orders>()
+                .HasOne(o => o.Table)
+                .WithOne(t => t.Order)
+                .HasForeignKey<Table>(t => t.OrderId);
 
             modelBuilder.Entity<MenuItems>()
                 .HasOne(mi => mi.Menu)

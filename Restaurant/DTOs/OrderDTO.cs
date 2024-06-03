@@ -15,9 +15,9 @@ namespace Restaurant.DTOs
         [Required]
         public string Status { get; set; }
 
-       // public int ItemsID { get; set; }
+        public int[] ItemsIDs { get; set; }
 
-       // public int TableId { get; set; }
+        public int TableId { get; set; }
 
     }
 }

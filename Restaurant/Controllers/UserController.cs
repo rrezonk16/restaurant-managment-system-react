@@ -12,6 +12,8 @@ using System.Security.Claims;
 using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
+using Database.Context;
+using Microsoft.Identity.Client;
 
 
 namespace Restaurant.Controllers
@@ -35,6 +37,18 @@ namespace Restaurant.Controllers
         public async Task<Users> GetUser(int id, CancellationToken cancellationToken)
         {
             return await _repository.Get(id, cancellationToken);
+        }
+
+        [HttpGet]
+        [Route("[action]/{id}")]
+        public async Task<IActionResult> GetUsersID(int id, CancellationToken cancellationToken)
+        {
+            var user = await _repository.Get(id, cancellationToken);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user.Id);
         }
 
         [HttpGet]
@@ -90,7 +104,6 @@ namespace Restaurant.Controllers
             using (SqlCommand command = new SqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("Email", authRequest.email);
-
                 try
                 {
                     await connection.OpenAsync();
@@ -100,6 +113,11 @@ namespace Restaurant.Controllers
                         {
                             string retrievedEmail = reader["Email"].ToString();
                             string retrievedPassword = reader["Password"].ToString();
+
+                            if(retrievedEmail != authRequest.email || retrievedPassword != authRequest.password)
+                            {
+                                return Unauthorized("Invalid email or passwordd");
+                            }
 
                             if (!int.TryParse(_configuration["Jwt:Expiration"], out int exp))
                                 exp = 20;
