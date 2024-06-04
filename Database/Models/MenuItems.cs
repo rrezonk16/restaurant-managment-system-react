@@ -19,10 +19,5 @@ namespace Database.Models
 
         [ForeignKey("Id")]
         public Menu Menu { get; set; }
-
-        public Orders Orders { get; set; }
-        public int OrdersId { get; set; }
-
-
     }
 }

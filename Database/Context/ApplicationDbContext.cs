@@ -34,10 +34,7 @@ namespace Database.Context
             .WithMany(r => r.Users)
             .HasForeignKey(u => u.RoleId);
 
-            modelBuilder.Entity<Orders>()
-            .HasMany(o => o.MenuItems)
-            .WithOne(m => m.Orders)
-            .HasForeignKey(m => m.OrdersId);
+            modelBuilder.Entity<Orders>();
 
             modelBuilder.Entity<Orders>()
                 .HasOne(o => o.Table)
