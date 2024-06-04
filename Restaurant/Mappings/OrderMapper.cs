@@ -11,7 +11,7 @@ namespace Restaurant.Mappings
             { 
                 Price = orderDTO.Price,
                 Status = orderDTO.Status,
-                //ItemsID = orderDTO.ItemsID,
+                //ItemsIDs = orderDTO.ItemsIDs,
                // TableId = orderDTO.TableId
             };
 

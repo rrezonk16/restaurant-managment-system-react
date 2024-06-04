@@ -10,17 +10,31 @@ namespace Database.Models
 {
     public class Reservation : BaseModel
     {
-        public int ID { get; set; }
-
         [Required]
-        public int UserID {  get; set; }
-
+        public DateTime ReservationDate { get; set; }
         [Required]
-        [ForeignKey("Restaurant")]
+        public int Hour { get;set; }
+        [Required]
+        public int NumberOfSeats { get; set; }
+
+        public int ClientId { get; set; }
+
+        [ForeignKey("ClientId")]
+        public Users Client { get; set; } // Navigation property
+
         public int RestaurantId { get; set; }
 
-        // Navigation property for the related restaurant
-        public Restaurants Restaurant { get; set; }
+        [ForeignKey("RestaurantId")]
+        public Restaurants Restaurant { get; set; } // Navigation property
+
+        public int TableId { get; set; }
+
+        [ForeignKey("TableId")]
+        public Table Table { get; set; } // Navigation property
+
+        public string? Status { get; set; }
+
+
     }
 
 }

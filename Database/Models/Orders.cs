@@ -15,9 +15,10 @@ namespace Database.Models
         public ICollection<MenuItems> MenuItems { get; set; }
 
         public int TableId { get; set; }
+        [ForeignKey("TableId")]
         public Table Table { get; set; }
 
-        public int UserId { get; set; }
-        public Users User { get; set; }
+        public int userID { get; set; }
+        public Users User { get;set; }
     }
 }

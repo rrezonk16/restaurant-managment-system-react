@@ -5,8 +5,6 @@ namespace Restaurant.Services
 {
     public interface IRestaurantService
     {
-        Task AddRestaurant(Restaurants restaurant,CancellationToken cancellationToken);
-
-        Task<Restaurants> UpdateRestaurant(int id,RestaurantDTO restaurantDTO, CancellationToken cancellationToken);
+        Task AddRestaurant(RestaurantDTO restaurantDTO,CancellationToken cancellationToken);
     }
 }

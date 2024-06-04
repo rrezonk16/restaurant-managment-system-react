@@ -15,11 +15,10 @@ namespace Database.Models
         [Required]
         public string OpenHours { get; set; }
 
-        [ForeignKey("Manager")]
         public int? ManagerId { get; set; }
-        public Users Manager { get; set; }
+        
 
-        public ICollection<Reservation> Reservations { get; set; }
+        //public ICollection<Reservation> Reservations { get; set; }
 
     }
 }

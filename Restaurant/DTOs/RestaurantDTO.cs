@@ -3,9 +3,7 @@
 namespace Restaurant.DTOs
 {
     public class RestaurantDTO
-    {
-        public int Id { get; set; }  // Assuming BaseModel has an Id property
-
+    {        
         public string Name { get; set; }
 
         public string Address { get; set; }
@@ -13,10 +11,9 @@ namespace Restaurant.DTOs
         public string OpenHours { get; set; }
 
         public int? ManagerId { get; set; }
+        //
+        //public UserDTO? Manager { get; set; }
 
-        // You can include a list of Reservation IDs or simplified Reservation DTOs
-        public List<int> Reservations{ get; set; }
-
-        public String Status { get; set; }
+        //public ICollection<ReservationDTO> Reservations { get; set; }
     }
 }

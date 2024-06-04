@@ -18,6 +18,7 @@ namespace Restaurant.DTOs
         public int[] ItemsIDs { get; set; }
 
         public int TableId { get; set; }
+        public int userID { get; set; }
 
     }
 }

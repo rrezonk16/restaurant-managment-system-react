@@ -13,7 +13,8 @@ namespace Database.Models
         protected BaseModel()
         {
             CreatedAt = DateTime.Now;
-            UpdatedtAt = DateTime.Now; 
+            UpdatedtAt = DateTime.Now;
+            Status = "active";
         }
 
         [Key]

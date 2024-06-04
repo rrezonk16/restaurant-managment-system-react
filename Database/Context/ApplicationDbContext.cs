@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +21,13 @@ namespace Database.Context
 
             modelBuilder.Entity<Menu>();
 
+            modelBuilder.Entity<Reservation>();
+
+            //modelBuilder.Entity<Users>();
             modelBuilder.Entity<Users>()
            .HasMany(u => u.Orders)
            .WithOne(o => o.User)
-           .HasForeignKey(o => o.UserId);
+           .HasForeignKey(o => o.userID);
 
             modelBuilder.Entity<Users>()
             .HasOne(u => u.Role)

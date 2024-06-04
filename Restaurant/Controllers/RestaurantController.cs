@@ -28,7 +28,7 @@ namespace Restaurant.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> AddRestaurant(Restaurants restaurant, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddRestaurant(RestaurantDTO restaurant, CancellationToken cancellationToken)
         {
             await _restaurantService.AddRestaurant(restaurant, cancellationToken);
             return Ok();
