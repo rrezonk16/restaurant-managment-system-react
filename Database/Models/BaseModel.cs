@@ -13,7 +13,8 @@ namespace Database.Models
         protected BaseModel()
         {
             CreatedAt = DateTime.Now;
-            UpdatedtAt = DateTime.Now; 
+            UpdatedtAt = DateTime.Now;
+            Status = "active";
         }
 
         [Key]
@@ -28,5 +29,6 @@ namespace Database.Models
 
         [Required]
         public string? Status { get; set; }
+
     }
 }
