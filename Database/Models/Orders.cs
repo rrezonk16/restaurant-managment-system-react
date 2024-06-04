@@ -12,7 +12,7 @@ namespace Database.Models
         [Required]
         public string Status { get; set; }
 
-        public ICollection<MenuItems> MenuItems { get; set; }
+        //public ICollection<MenuItems> MenuItems { get; set; }
 
         public int TableId { get; set; }
         [ForeignKey("TableId")]
