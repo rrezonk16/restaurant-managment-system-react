@@ -9,14 +9,7 @@ namespace Restaurant.Mappings
     {
         public static Users UserDTOToModel(UserDTO userDTO)
         {
-            string password = userDTO.Password;
-
-            byte[] salt = GenerateSalt();
-
-            byte[] hashedPassword = HashPassword(password, salt);
-
-            string hashedPasswordBase64 = Convert.ToBase64String(hashedPassword);
-
+            string hashedPassword = HashPassword(userDTO.Password);
             return new Users
             {
                 Name = userDTO.Name,
@@ -24,31 +17,28 @@ namespace Restaurant.Mappings
                 Email = userDTO.Email,
                 Birthday = userDTO.Birthday,
                 PhoneNumber = userDTO.PhoneNumber,
-                Password = hashedPasswordBase64,
+                Password = hashedPassword,
+                RoleId = userDTO.RoleId,
+                Status = userDTO.Status,
+                ContractDueDate = userDTO.ContractDueDate,
             };
         }
 
-        private static byte[] GenerateSalt()
+        public static string HashPassword(string password)
         {
-            byte[] salt = new byte[32];
-            using (var rng = new RNGCryptoServiceProvider())
+            using (var sha256 = SHA256.Create())
             {
-                rng.GetBytes(salt);
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return Convert.ToBase64String(hashedBytes);
             }
-            return salt;
         }
-        private static byte[] HashPassword(string password, byte[] salt)
-        {
-            using (var sha256 = new SHA256Managed())
-            {
-                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
-                byte[] saltedPassword = new byte[passwordBytes.Length + salt.Length];
-                Buffer.BlockCopy(passwordBytes, 0, saltedPassword, 0, passwordBytes.Length);
-                Buffer.BlockCopy(salt, 0, saltedPassword, passwordBytes.Length, salt.Length);
 
-                return sha256.ComputeHash(saltedPassword);
-            }
+        public static bool VerifyPassword(string enteredPassword, string storedHash)
+        {
+            string enteredHash = HashPassword(enteredPassword);
+            return enteredHash == storedHash;
         }
     }
+
 }
 

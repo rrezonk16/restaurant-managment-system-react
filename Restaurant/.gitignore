@@ -1,2 +1,6 @@
-.vs
-obj
+# Ignore Visual Studio files
+.vs/
+
+# Ignore build output folders
+obj/
+bin/

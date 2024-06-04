@@ -4,6 +4,8 @@ using Database.Repository;
 using Microsoft.EntityFrameworkCore;
 using Restaurant.DTOs;
 using Restaurant.Mappings;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Restaurant.Services
 {
@@ -13,30 +15,31 @@ namespace Restaurant.Services
         private readonly ILogger<UserService> _logger;
         private readonly ApplicationDbContext _context;
 
-        public UserService(IRepository<Users> repository, ILogger<UserService> logger,ApplicationDbContext context)
+        public UserService(IRepository<Users> repository, ILogger<UserService> logger, ApplicationDbContext context)
         {
             _repository = repository;
             _logger = logger;
             _context = context;
         }
 
-        public async Task LogIn(string email,CancellationToken cancellationToken)
+        public async Task<Users> GetUserByEmailAsync(string email)
         {
-            var user = await GetUserByEmailAsync(email);
-            if(user == null)
-            {
-                return;
-            }
+            return await _repository.GetQuery().FirstOrDefaultAsync(e => e.Email == email);
         }
 
-        private async Task<Users> GetUserByEmailAsync(string email)
+        public async Task<Users?> LogIn(string email, string password, CancellationToken cancellationToken)
         {
-            return await _repository.GetAll().FirstOrDefaultAsync(e => e.Email == email);
+            var user = await GetUserByEmailAsync(email);
+            if (user == null || !UserMapper.VerifyPassword(password, user.Password))
+            {
+                return null;
+            }
+            return user;
         }
 
         public async Task RegisterUser(UserDTO userDTO, CancellationToken cancellationToken)
         {
-             Users registeredUser = UserMapper.UserDTOToModel(userDTO);
+            Users registeredUser = UserMapper.UserDTOToModel(userDTO);
             registeredUser.RoleId = 1;
             registeredUser.Status = "active";
             _repository.Add(registeredUser);
@@ -48,19 +51,21 @@ namespace Restaurant.Services
             _repository.Delete(Id, cancellation);
         }
 
-        public  Users UpdateUser(int id,UserDTO userDTO)
+        public Users UpdateUser(int id, UserDTO userDTO)
         {
             var user = _context.Set<Users>().FirstOrDefault(n => n.Id == id);
-            if(user != null) 
+            if (user != null)
             {
                 user.Surname = userDTO.Surname;
                 user.Name = userDTO.Name;
                 user.Email = userDTO.Email;
-                user.Password = userDTO.Password;
+                user.Password = UserMapper.HashPassword(userDTO.Password);
                 user.RoleId = userDTO.RoleId;
                 _repository.Save();
             }
             return user;
         }
     }
+
+
 }

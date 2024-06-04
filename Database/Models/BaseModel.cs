@@ -29,5 +29,6 @@ namespace Database.Models
 
         [Required]
         public string? Status { get; set; }
+
     }
 }

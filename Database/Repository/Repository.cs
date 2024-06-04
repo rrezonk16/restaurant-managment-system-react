@@ -1,8 +1,6 @@
 ﻿using Database.Context;
 using Database.Models;
-using Database.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,6 +20,7 @@ namespace Database.Repository
         {
             _context.Add(entity);
         }
+
         public IQueryable<T> GetQuery()
         {
             return _context.Set<T>();
@@ -29,8 +28,11 @@ namespace Database.Repository
 
         public void Delete(int id, CancellationToken token)
         {
-            var enetity = _context.Set<T>().FirstOrDefault(f => f.Id == id);
-            _context.Remove(enetity);
+            var entity = _context.Set<T>().FirstOrDefault(f => f.Id == id);
+            if (entity != null)
+            {
+                _context.Remove(entity);
+            }
         }
 
         public async Task<T?> Get(int id, CancellationToken token)
@@ -57,6 +59,5 @@ namespace Database.Repository
         {
             _context.SaveChanges();
         }
-
     }
 }
