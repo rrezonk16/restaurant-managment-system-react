@@ -8,6 +8,7 @@ import Register from "./Components/Authentication/Register";
 
 import Panel from "./Components/Admin/Panel";
 import FoodMenu from "./Components/Menu/FoodMenu";
+import MenuItems from "./Components/Menu/MenuItems";
 
 
 const routes = [
@@ -35,13 +36,17 @@ const routes = [
     path: "/Reserve",
     element: <MakeReservation/>
   },
-  localStorage.getItem('role') === 'admin' && {
+  localStorage.getItem('role') === "3" && {
     path: "/Admin",
     element: <Panel/>
   },
   {
     path: "/Menu",
     element: <FoodMenu/>
+  },
+  {
+    path: "/Menu-items",
+    element: <MenuItems/>
   },
 ];
 function App() {

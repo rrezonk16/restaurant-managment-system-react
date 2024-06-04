@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./Images/logo.png";
 import "../App.css";
 import Navbar from "./Navigation/Navbar";
@@ -28,6 +28,14 @@ const scrollToSection2 = () => {
 };
 
 const Main = () => {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const secondVisit = params.get("second-visit");
+    if (secondVisit === "1") {
+      scrollToSection2();
+    }
+  }, []);
+
   return (
     <div>
       <div

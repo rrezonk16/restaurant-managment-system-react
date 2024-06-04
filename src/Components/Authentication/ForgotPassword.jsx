@@ -1,14 +1,13 @@
 import axios from "axios"; // Import Axios
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Logo from "../Images/logo.png";
 import LemonHalf from "../Error/Lemonhalf.png";
 import LemonCerek from "../Error/LemonCerek.png";
 import { useNavigate } from "react-router-dom";
-const Login = () => {
+const ForgotPassword = () => {
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+
   });
   const [errorMessage, setErrorMesagge] = useState("");
 
@@ -35,14 +34,14 @@ const Login = () => {
         navigate("/");
         console.log(response);
         localStorage.setItem("token", response.data);
-        localStorage.setItem("role", response.data.roleId);
+        localStorage.setItem("role", "admin");
       } else {
         console.log(response.data);
         console.error("Login failed");
       }
     } catch (error) {
       setErrorMesagge(error.response.data);
-
+        console.log(errorMessage);
       console.error("Error:", error);
     }
   };
@@ -61,7 +60,7 @@ const Login = () => {
         onSubmit={handleSubmit}
         className="bg-white rounded-lg p-8 shadow-lg text-center z-50"
       >
-        <h1 className="text-center text-2xl mb-7 ">Login</h1>
+        <h1 className="text-center text-2xl mb-7 ">Forgot password</h1>
         <div className="mb-4">
           <label
             htmlFor="email"
@@ -78,44 +77,14 @@ const Login = () => {
             className="border-gray-300 rounded-md px-4 py-2 w-72 focus:outline-none focus:ring-2 ring-2 focus:ring-blue-800 ring-blue-400"
           />
         </div>
-        <div className="mb-4">
-          <label
-            htmlFor="password"
-            className="block text-gray-700 text-sm font-bold mb-2"
-          >
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="border-gray-300 rounded-md px-4 py-2 w-72 focus:outline-none focus:ring-2 ring-2 focus:ring-blue-800 ring-blue-400"
-          />
-          <p className="mt-2 text-red-700 text-left"> {errorMessage}</p>
-        </div>
-        
+
         <button
           type="submit"
           className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
         >
-          Sign In
+          Submit
         </button>
-
-        <div className="mt-4 flex flex-row  justify-between">
-          <p className="text-gray-600">Don't have an account?</p>
-          <Link to="/register" className="text-blue-400 hover:text-blue-500">
-            Sign Up
-          </Link>
-        </div>
-        <hr className="my-4 border-1 border-blue-300" />
-
-        <div className="flex flex-row justify-center mt-5 gap-5 mb-4 ">
-          <Link to="/register" className="text-red-400 hover:text-red-500 text-right">
-            Forgot your password?
-          </Link>
-        </div>
+       
       </form>
 
       <img
@@ -142,4 +111,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
