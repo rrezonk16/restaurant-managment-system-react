@@ -40,6 +40,7 @@ builder.Services.AddScoped<IMenuService,MenuService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 builder.Services.AddScoped<IOrderService,OrderService>();
 builder.Services.AddScoped<IMenuItems,MenuItemsService>();
+builder.Services.AddScoped<IRoleService,RoleService>();
 builder.Services.AddScoped<IRezervationService,ReservationService>();
 
 builder.Services.AddEndpointsApiExplorer();

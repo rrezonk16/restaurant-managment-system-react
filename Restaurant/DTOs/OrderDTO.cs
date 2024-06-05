@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Database.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +16,11 @@ namespace Restaurant.DTOs
 
         [Required]
         public string Status { get; set; }
-
-        public int[] ItemsIDs { get; set; }
-
         public int TableId { get; set; }
         public int userID { get; set; }
+        [NotMapped]
+        public ICollection<int> MenuItemIds { get; set; }
+
 
     }
 }

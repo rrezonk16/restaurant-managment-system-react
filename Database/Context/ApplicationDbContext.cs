@@ -31,20 +31,22 @@ namespace Database.Context
 
             modelBuilder.Entity<Users>()
             .HasOne(u => u.Role)
-            .WithMany(r => r.Users)
+            .WithMany()
             .HasForeignKey(u => u.RoleId);
 
             modelBuilder.Entity<Orders>();
 
-            modelBuilder.Entity<Orders>()
-                .HasOne(o => o.Table)
-                .WithOne(t => t.Order)
-                .HasForeignKey<Table>(t => t.OrderId);
+            modelBuilder.Entity<Table>()
+         .HasOne(t => t.Order)
+         .WithOne(o => o.Table)
+         .HasForeignKey<Orders>(o => o.TableId);
 
             modelBuilder.Entity<MenuItems>()
                 .HasOne(mi => mi.Menu)
                 .WithMany()
                 .HasForeignKey(mi => mi.MenuID);
+
+            modelBuilder.Entity<Roles>();
         }
     }
 }

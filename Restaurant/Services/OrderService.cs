@@ -33,9 +33,9 @@ namespace Restaurant.Services
             if(order != null)
             {
                 order.Status = orderDTO.Status;
-                order.Price = orderDTO.Price;
-                //order.TableId = orderDTO.TableId;
-               // order.ItemsID = orderDTO.ItemsID;
+                order.TableId = orderDTO.TableId;
+                order.MenuItemIds = orderDTO.MenuItemIds;
+                order.userID = orderDTO.userID;
                 _repository.Save();
             }
             return order;

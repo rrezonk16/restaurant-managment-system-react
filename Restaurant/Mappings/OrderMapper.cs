@@ -9,10 +9,10 @@ namespace Restaurant.Mappings
         {
             return new Orders
             { 
-                Price = orderDTO.Price,
                 Status = orderDTO.Status,
-                //ItemsIDs = orderDTO.ItemsIDs,
-               // TableId = orderDTO.TableId
+                MenuItemIds = orderDTO.MenuItemIds,
+                TableId = orderDTO.TableId,
+                userID = orderDTO.userID
             };
 
         }
