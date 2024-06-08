@@ -14,7 +14,6 @@ namespace Database.Models
         public int NumberOfSeats { get; set; }
 
         public Orders Order { get; set; }
-        public int OrderId { get; set; }
 
     }
 
