@@ -1,6 +1,7 @@
 ﻿using Database.Context;
 using Database.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,6 +59,13 @@ namespace Database.Repository
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public async Task<IEnumerable<MenuItems>> GetMenuItemsByMenuID(int menuID, CancellationToken token)
+        {
+            return await _context.Set<MenuItems>()
+                .Where(mi => mi.MenuID == menuID)
+                .ToListAsync(token);
         }
     }
 }

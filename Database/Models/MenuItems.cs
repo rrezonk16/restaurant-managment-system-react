@@ -18,6 +18,6 @@ namespace Database.Models
         public int MenuID { get; set; }
 
         [ForeignKey("Id")]
-        public Menu Menu { get; set; }
+        public Menu Menu { get; set; }  
     }
 }

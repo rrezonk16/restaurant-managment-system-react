@@ -1,5 +1,4 @@
 using Database.Context;
-using MySql.EntityFrameworkCore.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Database.Repository;
 using Database.Models;
@@ -36,11 +35,11 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IMenuService,MenuService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
-builder.Services.AddScoped<IOrderService,OrderService>();
-builder.Services.AddScoped<IMenuItems,MenuItemsService>();
-builder.Services.AddScoped<IRezervationService,ReservationService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IMenuItems, MenuItemsService>();
+builder.Services.AddScoped<IRezervationService, ReservationService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -68,6 +67,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins); // Enable CORS
+app.UseAuthentication(); // Add this line
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();

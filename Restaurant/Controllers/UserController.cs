@@ -1,20 +1,14 @@
 ﻿using Database.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Database.Models;
-using Org.BouncyCastle.Utilities;
-using System.CodeDom;
 using Restaurant.Services;
 using Restaurant.DTOs;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Data.SqlClient;
-using Database.Context;
-using Microsoft.Identity.Client;
-
 
 namespace Restaurant.Controllers
 {
@@ -25,6 +19,7 @@ namespace Restaurant.Controllers
         private readonly IRepository<Users> _repository;
         private readonly IUserService _userService;
         private readonly IConfiguration _configuration;
+
         public UserController(IRepository<Users> repository, IUserService userService, IConfiguration configuration)
         {
             _repository = repository;
@@ -33,6 +28,7 @@ namespace Restaurant.Controllers
         }
 
         [HttpGet]
+        [Authorize] // This endpoint requires authentication
         [Route("[action]/{id}")]
         public async Task<Users> GetUser(int id, CancellationToken cancellationToken)
         {
@@ -40,6 +36,7 @@ namespace Restaurant.Controllers
         }
 
         [HttpGet]
+        [Authorize] // This endpoint requires authentication
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetUsersID(int id, CancellationToken cancellationToken)
         {
@@ -52,6 +49,7 @@ namespace Restaurant.Controllers
         }
 
         [HttpGet]
+        [Authorize] 
         [Route("[action]")]
         public IEnumerable<Users> GetAllUsers()
         {
@@ -67,7 +65,8 @@ namespace Restaurant.Controllers
         }
 
         [HttpDelete("delete-user-by-id/{id}")]
-        public void DeleteUser(int id,CancellationToken cancellationToken)
+        [Authorize] // This endpoint requires authentication
+        public void DeleteUser(int id, CancellationToken cancellationToken)
         {
             string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
 
@@ -76,7 +75,7 @@ namespace Restaurant.Controllers
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(query,sqlConnection))
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
                 {
                     sqlCommand.Parameters.AddWithValue("@id", id);
                     int rowsAffected = sqlCommand.ExecuteNonQuery();
@@ -85,7 +84,8 @@ namespace Restaurant.Controllers
         }
 
         [HttpPut("update-user-by-id/{id}")]
-        public IActionResult UpdateUser(int id,[FromBody]UserDTO userDTO, CancellationToken cancellationToken)
+        [Authorize] // This endpoint requires authentication
+        public IActionResult UpdateUser(int id, [FromBody] UserDTO userDTO, CancellationToken cancellationToken)
         {
             var book = _userService.UpdateUser(id, userDTO);
             return Ok(book);
@@ -108,13 +108,13 @@ namespace Restaurant.Controllers
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-        new Claim("id", user.Id.ToString()),
-        new Claim("name", user.Name),
-        new Claim("surname", user.Surname),
-        new Claim("roleId", user.RoleId.ToString())
-    };
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                new Claim("id", user.Id.ToString()),
+                new Claim("name", user.Name),
+                new Claim("surname", user.Surname),
+                new Claim("roleId", user.RoleId.ToString())
+            };
             var token = new JwtSecurityToken(
                 _configuration["Jwt:Issuer"],
                 _configuration["Jwt:Audience"],
@@ -135,5 +135,18 @@ namespace Restaurant.Controllers
             return Ok(response);
         }
 
+        // New endpoint to get users by RoleId
+        [HttpGet]
+        [Authorize] // This endpoint requires authentication
+        [Route("GetUsersByRoleId/{roleId}")]
+        public IActionResult GetUsersByRoleId(int roleId)
+        {
+            var users = _repository.GetAll().Where(u => u.RoleId == roleId).ToList();
+            if (users == null || !users.Any())
+            {
+                return NotFound();
+            }
+            return Ok(users);
+        }
     }
 }

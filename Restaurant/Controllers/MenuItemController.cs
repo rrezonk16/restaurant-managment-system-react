@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Restaurant.DTOs;
 using Restaurant.Services;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Restaurant.Controllers
 {
@@ -63,29 +66,37 @@ namespace Restaurant.Controllers
 
         [HttpDelete]
         [Route("[action]")]
-         void DeleteMenuItem(int id)
-         {
-             string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
+        void DeleteMenuItem(int id)
+        {
+            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
 
-             string query = "Delete FROM MenuItems WHERE Id = @id";
+            string query = "Delete FROM MenuItems WHERE Id = @id";
 
-             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
-             {
-                 sqlConnection.Open();
-                 using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
-                 {
-                     sqlCommand.Parameters.AddWithValue("@id", id);
-                     int rowsAffected = sqlCommand.ExecuteNonQuery();
-                     sqlConnection.Close();
-                 }
-             }
-         }
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@id", id);
+                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Close();
+                }
+            }
+        }
 
         [HttpPut]
         public IActionResult UpdateMenu(int id, [FromBody] MenuItemsDTO menuItemDTO)
         {
             var menu = _menuItemService.UpdateMenuItem(id, menuItemDTO);
             return Ok(menu);
+        }
+
+        [HttpGet]
+        [Route("[action]/{menuID}")]
+        public async Task<IActionResult> GetMenuItemsByMenuID(int menuID, CancellationToken token)
+        {
+            var menuItems = await _menuItemService.GetMenuItemsByMenuID(menuID, token);
+            return Ok(menuItems);
         }
     }
 }
