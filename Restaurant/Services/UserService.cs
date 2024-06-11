@@ -40,7 +40,7 @@ namespace Restaurant.Services
         public async Task RegisterUser(UserDTO userDTO, CancellationToken cancellationToken)
         {
             Users registeredUser = UserMapper.UserDTOToModel(userDTO);
-            registeredUser.RoleId = 1;
+            registeredUser.RoleId = 3;
             registeredUser.Status = "active";
             _repository.Add(registeredUser);
             await _repository.SaveAsync(cancellationToken);
