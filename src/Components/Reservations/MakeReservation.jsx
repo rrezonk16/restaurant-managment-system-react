@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Assuming you are using react-router for navigation
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Footer/Footer";
 import kosovo from "./kosovo.svg";
@@ -13,6 +15,8 @@ const MakeReservation = () => {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [hoveredTime, setHoveredTime] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(""); // New state for selected date
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleTimeMouseEnter = (time) => {
     setHoveredTime(time);
@@ -25,7 +29,6 @@ const MakeReservation = () => {
   const handleTimeClick = (time) => {
     setSelectedTime(time);
   };
-  
 
   const handleMouseEnter = (value) => {
     setHoveredButton(value);
@@ -42,6 +45,11 @@ const MakeReservation = () => {
   const handleRestaurantClick = (restaurant) => {
     setSelectedRestaurant(restaurant);
   };
+
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
   useEffect(() => {
     const todayDate = new Date();
     const dd = String(todayDate.getDate()).padStart(2, "0");
@@ -56,14 +64,46 @@ const MakeReservation = () => {
     const yyyy_tomorrow = tomorrowDate.getFullYear();
     setTomorrow(`${dd_tomorrow}.${mm_tomorrow}.${yyyy_tomorrow}`);
   }, []);
+
   useEffect(() => {
     document.title = 'Reserve';
-  }, []);  
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const clientId = localStorage.getItem("id");
+    if (!clientId) {
+      navigate("/login");
+      return;
+    }
+
+    console.log(selectedDate); 
+    const reservationData = {
+      selectedDate,
+      clientId,
+      restaurantId: selectedRestaurant, // Assuming restaurant ID is the same as selectedRestaurant
+      tableId: 21,
+      status: "active",
+      numberOfSeats: selectedButton,
+      hour: selectedTime
+    };
+
+    try {
+      const response = await axios.post("https://localhost:7046/api/Reservation", reservationData);
+      console.log("Reservation successful:", response);
+      if (response.status===200) {
+        navigate("/my-reservations")
+      }
+    } catch (error) {
+      console.error("Error making reservation:", error);
+    }
+  };
+
   return (
     <div className="bg-blue-900 flex justify-between flex-col text-white ">
       <Navbar />
       <div className="container mx-auto flex flex-col justify-center my-8">
-        <form className="w-full max-w-sm mx-auto">
+        <form className="w-full max-w-sm mx-auto" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="time" className="block text-white font-bold mb-2">
               Select Restaurant:
@@ -72,11 +112,11 @@ const MakeReservation = () => {
               <button
                 type="button"
                 className={`px-4 py-2 rounded-md bg-gray-800 text-white w-1/3 ${
-                  selectedRestaurant === "Prishtina"
+                  selectedRestaurant === "2"
                     ? "bg-green-800"
                     : "hover:bg-green-700 active:bg-green-800"
                 }`}
-                onClick={() => handleRestaurantClick("Prishtina")}
+                onClick={() => handleRestaurantClick("2")}
               >
                 Prishtina
                 <img src={kosovo} alt="" className="" />
@@ -84,11 +124,11 @@ const MakeReservation = () => {
               <button
                 type="button"
                 className={`px-4 py-2 rounded-md bg-gray-800 text-white w-1/3 ${
-                  selectedRestaurant === "Tirana"
+                  selectedRestaurant === "4"
                     ? "bg-green-800"
                     : "hover:bg-green-700 active:bg-green-800"
                 }`}
-                onClick={() => handleRestaurantClick("Tirana")}
+                onClick={() => handleRestaurantClick("4")}
               >
                 Tirana
                 <img src={albania} alt="" className="" />
@@ -96,11 +136,11 @@ const MakeReservation = () => {
               <button
                 type="button"
                 className={`px-4 py-2 rounded-md bg-gray-800 text-white w-1/3 ${
-                  selectedRestaurant === "Skopje"
+                  selectedRestaurant === "3"
                     ? "bg-green-800"
                     : "hover:bg-green-700 active:bg-green-800"
                 }`}
-                onClick={() => handleRestaurantClick("Skopje")}
+                onClick={() => handleRestaurantClick("3")}
               >
                 Skopje
                 <img src={macedonia} alt="" className="" />
@@ -115,6 +155,7 @@ const MakeReservation = () => {
               <button
                 type="button"
                 className="px-4 py-2 rounded-md bg-gray-800 text-white w-1/3"
+                onClick={() => setSelectedDate(today)}
               >
                 Today
                 <br />
@@ -123,6 +164,7 @@ const MakeReservation = () => {
               <button
                 type="button"
                 className="px-4 py-2 rounded-md bg-gray-800 text-white w-1/3"
+                onClick={() => setSelectedDate(tomorrow)}
               >
                 Tomorrow
                 <br />
@@ -133,32 +175,33 @@ const MakeReservation = () => {
                 id="date"
                 name="date"
                 className="w-1/3 h-28 px-1 rounded-md bg-gray-800 text-white text-sm"
+                onChange={handleDateChange}
               />
             </div>
           </div>
           <div className="mb-4">
-      <label htmlFor="time" className="block text-white font-bold mb-2">
-        Select Time:
-      </label>
-      <div className="flex space-x-2">
-        {[8, 9, 10, 11].map((hour) => (
-          <button
-            key={hour}
-            type="button"
-            className={`px-4 py-2 rounded-md bg-gray-800 text-white ${
-              (selectedTime && hour === selectedTime) || (hoveredTime && hour <= hoveredTime)
-                ? 'bg-green-600'
-                : 'hover:bg-green-600'
-            }`}
-            onMouseEnter={() => handleTimeMouseEnter(hour)}
-            onMouseLeave={handleTimeMouseLeave}
-            onClick={() => handleTimeClick(hour)}
-          >
-            {hour}:00 PM
-          </button>
-        ))}
-      </div>
-    </div>
+            <label htmlFor="time" className="block text-white font-bold mb-2">
+              Select Time:
+            </label>
+            <div className="flex space-x-2">
+              {[8, 9, 10, 11].map((hour) => (
+                <button
+                  key={hour}
+                  type="button"
+                  className={`px-4 py-2 rounded-md bg-gray-800 text-white ${
+                    (selectedTime && hour === selectedTime) || (hoveredTime && hour <= hoveredTime)
+                      ? 'bg-green-600'
+                      : 'hover:bg-green-600'
+                  }`}
+                  onMouseEnter={() => handleTimeMouseEnter(hour)}
+                  onMouseLeave={handleTimeMouseLeave}
+                  onClick={() => handleTimeClick(hour)}
+                >
+                  {hour}:00 PM
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="mb-4">
             <label htmlFor="time" className="block text-white font-bold mb-2">
               Number of people

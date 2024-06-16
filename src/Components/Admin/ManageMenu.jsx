@@ -6,13 +6,14 @@ const ManageMenu = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [DeleteUserId, setDeleteUserId] = useState(0);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-
+  const [chef, setChef] = useState('');
+  const [chefs, setChefs] = useState([]);
   const [menus, setMenus] = useState([]);
   const [menuData, setMenuData] = useState({
     name: "",
     description: "",
-    status: "active",
-    chefId: "3",
+    status: "",
+    chefId: chef,
   });
 
   const fetchMenuData = async (id) => {
@@ -41,7 +42,18 @@ const ManageMenu = () => {
         console.error("Error fetching Menus:", error);
       }
     };
-
+    const fetchChefs = async () => {
+      try {
+        const response = await axios.get(
+          "https://localhost:7046/api/User/GetUsersByRoleId/3"
+        );
+        console.log(response.data);
+        setChefs(response.data);
+      } catch (error) {
+        console.error("Error fetching Menus:", error);
+      }
+    };
+    fetchChefs()
     fetchMenus();
   }, []);
   const handleDeleteOnEditClick = () => {
@@ -64,7 +76,7 @@ const ManageMenu = () => {
           name: menuData.name,
           description: menuData.description,
           chefId: 3,
-          status: "active",
+          status: menuData.status,
         }
       );
       setIsEditModalOpen(false);
@@ -103,7 +115,7 @@ const ManageMenu = () => {
         {
           name: menuData.name,
           description: menuData.description,
-          chefId: 3,
+          chefId: chef,
           status: "active",
         }
       );
@@ -174,7 +186,7 @@ const ManageMenu = () => {
                          onClick={() => openMenuItems(menu.id)}
                           class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
                         >
-                          Add Items
+                          Manage
                         </button>
                         <button
                           onClick={() => handleEditClick(menu.id)}
@@ -260,6 +272,11 @@ const ManageMenu = () => {
                       Stauts
                     </label>
                     <select
+                    onChange={(e) =>
+                      setMenuData({ ...menuData, status: e.target.value })
+                    }
+                    value={menuData.status}
+
                       id="status"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     >
@@ -458,6 +475,22 @@ const ManageMenu = () => {
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     />
                   </div>
+                  <div>
+      <label htmlFor="Chef" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Chef</label>
+      <select
+        id="Chef"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+        value={chef}
+        onChange={(e) => setChef(e.target.value)}
+      >
+        <option value="">Select a Chef</option>
+        {chefs.map((chef) => (
+          <option key={chef.id} value={chef.id}>
+            {chef.name}
+          </option>
+        ))}
+      </select>
+    </div>
                 </div>
                 <div class="flex items-center space-x-4">
                   <button

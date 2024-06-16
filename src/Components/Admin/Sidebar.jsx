@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Logo from "../Images/logo.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ManageSales from "./ManageSales";
 import ManageEmployees from "./ManageEmployees";
 import ManageMenu from "./ManageMenu";
@@ -8,13 +8,14 @@ import ManageReservations from "./ManageReservations";
 import ManageOrders from "./ManageOrders";
 import ManageUsers from "./ManageUsers";
 import ManageMenuItems from "./ManageMenuItems";
+import Branches from "./Branches";
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   //eslint-disable-next-line
-  const [isRoleAdmin, setIsRoleAdmin] = useState(true);
+  const [isRoleAdmin, setIsRoleAdmin] = useState(false);
   //eslint-disable-next-line
-  const [isRoleEmploeey, setIsRoleEmploeey] = useState(false);
+  const [isRoleEmployee, setIsRoleEmployee] = useState(false);
   //eslint-disable-next-line
   const [isRoleChef, setIsRoleChef] = useState(false);
   //eslint-disable-next-line
@@ -24,6 +25,39 @@ const Sidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    console.log(role);
+    switch (role) {
+      case "1":
+        setIsRoleAdmin(true);
+        break;
+      case "2":
+        setIsRoleManager(true);
+        break;
+      case "3":
+        setIsRoleChef(true);
+        break;
+      case "4":
+        setIsRoleEmployee(true);
+        break;
+      default:
+        break;
+    }
+  }, []);
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const name = localStorage.getItem('name');
+    if (name) {
+      setUserName(name);
+    }
+  }, []);
   const location = useLocation();
   const urlParams = new URLSearchParams(location.search);
   const tab = urlParams.get("tab");
@@ -69,18 +103,8 @@ const Sidebar = () => {
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pb-4 overflow-y-auto bg-gray-800 rounded-3xl">
-          {isRoleAdmin && (
-            <h1 className=" text-white ml-2 text-2xl">Welcome Admin</h1>
-          )}
-          {isRoleChef && (
-            <h1 className=" text-white ml-2 text-2xl">Welcome Chef</h1>
-          )}
-          {isRoleEmploeey && (
-            <h1 className=" text-white ml-2 text-2xl">Welcome Employee</h1>
-          )}
-            {isRoleManager && (
-            <h1 className=" text-white ml-2 text-2xl">Welcome Manager</h1>
-          )}
+            <h1 className=" text-white ml-2 text-2xl">      Welcome {userName}
+            </h1>
           <ul className="space-y-2 font-medium">
             {isRoleAdmin && (
               <ul>
@@ -102,6 +126,26 @@ const Sidebar = () => {
                       <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                     </svg>
                     <span className="ms-3">Sales</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/Admin?tab=Branches"
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                      tab === "Branches" ? "bg-slate-700" : ""
+                    }`}
+                  >
+                    <svg
+                      className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 22 21"
+                    >
+                      <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                      <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                    </svg>
+                    <span className="ms-3">Branches</span>
                   </a>
                 </li>
                 <li>
@@ -209,9 +253,9 @@ const Sidebar = () => {
                 </li>
 
                 <li>
-                  <a
-                    href="/Logout"
-                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${
+                  <p
+                    onClick={logout}
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-700 group ${
                       tab === "Logout" ? "bg-slate-700" : ""
                     }`}
                   >
@@ -233,12 +277,12 @@ const Sidebar = () => {
                     <span className="flex-1 ms-3 whitespace-nowrap">
                       Logout
                     </span>
-                  </a>
+                  </p>
                 </li>
               </ul>
             )}
 
-{isRoleManager && (
+            {isRoleManager && (
               <ul>
                 <li>
                   <a
@@ -307,7 +351,7 @@ const Sidebar = () => {
                 </li>
               </ul>
             )}
-            {isRoleEmploeey && (
+            {isRoleEmployee && (
               <ul>
                 <li>
                   <a
@@ -408,18 +452,20 @@ const Sidebar = () => {
         {tab === null && isRoleAdmin && <ManageSales />}
         {tab === "Menu-items" && isRoleAdmin && <ManageMenuItems />}
         {tab === "Sales" && isRoleAdmin && <ManageSales />}
-        {tab === "Employees" && (isRoleAdmin || isRoleEmploeey) && (
+        {tab === "Employees" && (isRoleAdmin || isRoleEmployee) && (
           <ManageEmployees />
         )}
-        {tab === "Reservations" && (isRoleAdmin || isRoleEmploeey) && (
+        {tab === "Reservations" && (isRoleAdmin || isRoleEmployee) && (
           <ManageReservations />
         )}
 
         {tab === "Menus" && (isRoleAdmin || isRoleChef) && <ManageMenu />}
-        {tab === "Orders" && (isRoleAdmin || isRoleEmploeey) && (
+        {tab === "Orders" && (isRoleAdmin || isRoleEmployee) && (
           <ManageOrders />
         )}
         {tab === "Users" && isRoleAdmin && <ManageUsers />}
+        {tab === "Branches" && isRoleAdmin && <Branches />}
+
       </div>
     </div>
   );

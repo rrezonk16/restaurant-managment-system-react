@@ -15,59 +15,70 @@ const ManageUsers = () => {
     roleId: "1",
   });
 
+  const getToken = () => localStorage.getItem('token');
+
+  axios.interceptors.request.use(
+    (config) => {
+      const token = getToken();
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+  
   // Function to fetch user data by ID
   const fetchUserData = async (id) => {
     try {
-      const response = await axios.get(
-        `https://localhost:7046/api/User/GetUser/${id}`
-      );
+      const response = await axios.get(`https://localhost:7046/api/User/GetUser/${id}`);
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
-
-
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get(
-          "https://localhost:7046/api/User/GetAllUsers"
-        );
+        const response = await axios.get("https://localhost:7046/api/User/GetAllUsers");
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
-
+  
     fetchUsers();
   }, []);
+  
   const handleDeleteOnEditClick = () => {
     setIsEditModalOpen(false);
     setIsDeleteModalOpen(true);
   };
-
+  
   const handleEditClick = async (id) => {
     await fetchUserData(id);
     setIsEditModalOpen(true);
   };
-
+  
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     console.log(userData);
-
+  
     try {
       const response = await axios.put(
         `https://localhost:7046/api/User/update-user-by-id/${userData.id}`,
-     {
+        {
           name: userData.name,
           surname: userData.surname,
           email: userData.email,
           phoneNumber: userData.phoneNumber,
-          password: '1123',
+          password: userData.phoneNumber,
           birthday: '2024-04-23T21:27:57.759Z',
-          roleId: 1,
-          status: 'active',
+          roleId: userData.roleId,
+          status: userData.status,
           contractDueDate: '2024-04-23T21:27:57.759Z'
         }
       );
@@ -77,25 +88,27 @@ const ManageUsers = () => {
     } catch (error) {
       console.error("Error updating user:", error);
       console.log({
-        name: userData.name,
-        surname: userData.surname,
-        email: userData.email,
-        phoneNumber: userData.phoneNumber,
-        password: '1123',
-        birthday: '2024-04-23T21:27:57.759Z',
-        roleId: 1,
-        status: 'active',
-        contractDueDate: '2024-04-23T21:27:57.759Z'
+        
+          name: userData.name,
+          surname: userData.surname,
+          email: userData.email,
+          phoneNumber: userData.phoneNumber,
+          password: userData.phoneNumber,
+          birthday: '2024-04-23T21:27:57.759Z',
+          roleId: userData.roleId,
+          status: userData.status,
+          contractDueDate: '2024-04-23T21:27:57.759Z'
+        
       });
     }
-    
   };
+  
   const handleDeleteClick = (id) => {
     setIsDeleteModalOpen(true);
     console.log(id);
-    setDeleteUserId(id)
+    setDeleteUserId(id);
   };
-
+  
   const handleDeleteUser = async () => {
     console.log(userData.id);
     try {
@@ -106,7 +119,6 @@ const ManageUsers = () => {
       console.error('Error deleting user:', error);
     }
   };
-
   return (
     <div>
       <section class="bg-gray-800 p-3 sm:p-5 antialiased rounded-2xl">

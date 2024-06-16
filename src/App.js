@@ -9,7 +9,13 @@ import Register from "./Components/Authentication/Register";
 import Panel from "./Components/Admin/Panel";
 import FoodMenu from "./Components/Menu/FoodMenu";
 import MenuItems from "./Components/Menu/MenuItems";
+import ForgotPassword from "./Components/Authentication/ForgotPassword";
+import AddCode from "./Components/Authentication/AddCode";
+import AddNewPassword from "./Components/Authentication/AddNewPassword";
+import UserOrder from "./Components/Orders/UserOrder";
+import GenerateBill from "./Components/Orders/GenerateBIll";
 
+const role = localStorage.getItem('role');
 
 const routes = [
   {
@@ -21,7 +27,7 @@ const routes = [
     element: <Error/>
   },
   {
-    path: "/Reservations",
+    path: "/my-reservations",
     element: <ViewReservation/>
   },
   {
@@ -36,9 +42,9 @@ const routes = [
     path: "/Reserve",
     element: <MakeReservation/>
   },
-  localStorage.getItem('role') === "3" && {
-    path: "/Admin",
-    element: <Panel/>
+  {
+    path: "/Order",
+    element: <UserOrder/>
   },
   {
     path: "/Menu",
@@ -48,7 +54,31 @@ const routes = [
     path: "/Menu-items",
     element: <MenuItems/>
   },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword/>
+  },
+  {
+    path: "/add-code",
+    element: <AddCode/>
+  },
+  {
+    path: "/recreate-password",
+    element: <AddNewPassword/>
+  },
+  {
+    path: "/order-bill",
+    element: <GenerateBill/>
+  },
 ];
+
+if (["1", "2", "3", "4"].includes(role)) {
+  routes.push({
+    path: "/Admin",
+    element: <Panel/>
+  });
+}
+
 function App() {
   
   return (

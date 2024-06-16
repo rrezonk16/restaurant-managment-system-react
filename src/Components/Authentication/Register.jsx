@@ -43,9 +43,7 @@ const Register = () => {
       const response = await axios.post("https://localhost:7046/api/User/Register", formattedData);
       console.log("Registration successful:", response);
         if(response.status === 200){
-          localStorage.setItem('role', 'admin');
-
-          navigate("/")
+          navigate("/login")
 
         }
     } catch (error) {

@@ -32,10 +32,16 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
-        navigate("/");
+        navigate("/?second-visit=1");
         console.log(response);
-        localStorage.setItem("token", response.data);
+        localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.roleId);
+        localStorage.setItem("name", response.data.name);
+        localStorage.setItem("surname", response.data.surname);
+        localStorage.setItem("id", response.data.id);
+
+
+
       } else {
         console.log(response.data);
         console.error("Login failed");
@@ -112,7 +118,7 @@ const Login = () => {
         <hr className="my-4 border-1 border-blue-300" />
 
         <div className="flex flex-row justify-center mt-5 gap-5 mb-4 ">
-          <Link to="/register" className="text-red-400 hover:text-red-500 text-right">
+          <Link to="/forgot-password" className="text-red-400 hover:text-red-500 text-right">
             Forgot your password?
           </Link>
         </div>

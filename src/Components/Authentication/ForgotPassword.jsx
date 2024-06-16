@@ -7,17 +7,19 @@ import { useNavigate } from "react-router-dom";
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
     email: "",
-
   });
   const [errorMessage, setErrorMesagge] = useState("");
-
+  //eslint-disable-next-line
+  const [isCheckEmailModalOpen, setisCheckEmailModalOpen] = useState(false);
   const navigate = useNavigate();
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    },
-    setErrorMesagge(" "));
+    setFormData(
+      {
+        ...formData,
+        [e.target.name]: e.target.value,
+      },
+      setErrorMesagge(" ")
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -28,7 +30,7 @@ const ForgotPassword = () => {
         "https://localhost:7046/api/User/LogIn",
         formData
       );
-
+//setisCheckEmailModalOpen after 200 is email sent
       if (response.status === 200) {
         console.log("Login successful");
         navigate("/");
@@ -41,13 +43,13 @@ const ForgotPassword = () => {
       }
     } catch (error) {
       setErrorMesagge(error.response.data);
-        console.log(errorMessage);
+      console.log(errorMessage);
       console.error("Error:", error);
     }
   };
 
   useEffect(() => {
-    document.title = "Login";
+    document.title = "Email";
   }, []);
 
   return (
@@ -84,8 +86,29 @@ const ForgotPassword = () => {
         >
           Submit
         </button>
-       
       </form>
+      {isCheckEmailModalOpen && (
+        <div
+          id="emailSentModal"
+          tabindex="-1"
+          aria-hidden="true"
+          className="overflow-y-auto overflow-x-hidden fixed z-50 inset-0 flex justify-center items-center h-full backdrop-blur-lg "
+        >
+          <div className="relative p-4 w-full max-w-2xl max-h-full">
+            <div className="relative p-4 bg-white rounded-lg shadow sm:p-5">
+              <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
+                <h2 className="text-lg font-medium">Check your email</h2>
+              </div>
+              <p className="text-base">We've sent a code to your email.</p>
+              <a href="/add-code">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out">
+                  Continue
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       <img
         src={LemonHalf}
