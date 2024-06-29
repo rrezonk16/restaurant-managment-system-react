@@ -32,7 +32,9 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log("Login successful");
-        navigate("/?second-visit=1");
+        if (response.data.roleId !== 5) {
+          navigate("/Admin");
+        } else {navigate("/?second-visit=1");}
         console.log(response);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("role", response.data.roleId);

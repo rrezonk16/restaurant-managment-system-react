@@ -38,18 +38,18 @@ const UserOrder = () => {
     const orderData = {
       price: 0,
       status: "active",
-      tableId: 20,
+      tableId: 1,
       userID: userId,
-      menuItemIds: selectedItems,
+      menuItemIds: JSON.stringify(selectedItems), // Convert array to string
     };
 
     axios
       .post("https://localhost:7046/api/Order/RegisterOrder", orderData)
       .then((response) => {
         console.log("Order registered successfully:", response);
-if (response.status===200) {
-  navigate(`/order-bill?id=${response.data.orderId}`)
-}
+        if (response.status === 200) {
+          navigate(`/order-bill?id=${response.data.orderId}`);
+        }
       })
       .catch((error) => {
         console.error("Error registering order:", error);

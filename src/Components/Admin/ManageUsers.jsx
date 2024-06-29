@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import TokenExpired from "../Token/TokenExpired";
 const ManageUsers = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [DeleteUserId, setDeleteUserId] = useState(0);
+  const [tokenExpired, setTokenExpired] = useState(false);
 
+  const [DeleteUserId, setDeleteUserId] = useState(0);
+  const [roles, setRoles] = useState([]);
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState({
     name: "",
     surname: "",
     email: "",
     phoneNumber: "",
-    status: "active",
-    roleId: "1",
+    status: "",
+    roleId: "",
   });
 
-  const getToken = () => localStorage.getItem('token');
+  const getToken = () => localStorage.getItem("token");
 
   axios.interceptors.request.use(
     (config) => {
       const token = getToken();
       if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+        config.headers["Authorization"] = `Bearer ${token}`;
       }
       return config;
     },
@@ -29,44 +32,48 @@ const ManageUsers = () => {
       return Promise.reject(error);
     }
   );
-  
+
   // Function to fetch user data by ID
   const fetchUserData = async (id) => {
     try {
-      const response = await axios.get(`https://localhost:7046/api/User/GetUser/${id}`);
+      const response = await axios.get(
+        `https://localhost:7046/api/User/GetUser/${id}`
+      );
       setUserData(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
-  
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("https://localhost:7046/api/User/GetAllUsers");
+        const response = await axios.get(
+          "https://localhost:7046/api/User/GetAllUsers"
+        );
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
-  
+
     fetchUsers();
   }, []);
-  
+
   const handleDeleteOnEditClick = () => {
     setIsEditModalOpen(false);
     setIsDeleteModalOpen(true);
   };
-  
+
   const handleEditClick = async (id) => {
     await fetchUserData(id);
     setIsEditModalOpen(true);
   };
-  
+
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     console.log(userData);
-  
+
     try {
       const response = await axios.put(
         `https://localhost:7046/api/User/update-user-by-id/${userData.id}`,
@@ -76,55 +83,86 @@ const ManageUsers = () => {
           email: userData.email,
           phoneNumber: userData.phoneNumber,
           password: userData.phoneNumber,
-          birthday: '2024-04-23T21:27:57.759Z',
+          birthday: "2024-04-23T21:27:57.759Z",
           roleId: userData.roleId,
           status: userData.status,
-          contractDueDate: '2024-04-23T21:27:57.759Z'
+          contractDueDate: "2024-04-23T21:27:57.759Z",
         }
       );
       setIsEditModalOpen(false);
       console.log(response);
-      window.location.reload();
     } catch (error) {
       console.error("Error updating user:", error);
       console.log({
-        
-          name: userData.name,
-          surname: userData.surname,
-          email: userData.email,
-          phoneNumber: userData.phoneNumber,
-          password: userData.phoneNumber,
-          birthday: '2024-04-23T21:27:57.759Z',
-          roleId: userData.roleId,
-          status: userData.status,
-          contractDueDate: '2024-04-23T21:27:57.759Z'
-        
+        name: userData.name,
+        surname: userData.surname,
+        email: userData.email,
+        phoneNumber: userData.phoneNumber,
+        password: userData.phoneNumber,
+        birthday: "2024-04-23T21:27:57.759Z",
+        roleId: userData.roleId,
+        status: userData.status,
+        contractDueDate: "2024-04-23T21:27:57.759Z",
       });
     }
   };
-  
+
   const handleDeleteClick = (id) => {
     setIsDeleteModalOpen(true);
     console.log(id);
     setDeleteUserId(id);
   };
-  
   const handleDeleteUser = async () => {
-    console.log(userData.id);
+    console.log("Deleting user with ID:", DeleteUserId);
     try {
-      await axios.delete(`https://localhost:7046/api/User/delete-user-by-id/${DeleteUserId}`);
-      setIsDeleteModalOpen(false);
-      window.location.reload();
+      const response = await axios.delete(
+        `https://localhost:7046/api/User/delete-user-by-id/${DeleteUserId}`
+      );
+      console.log("Delete response:", response);
+  
+      if (response.status === 200) {
+        window.location.reload();
+        setIsDeleteModalOpen(false);
+      } else if (response.status === 404) {
+        // Handle 404 Not Found (user not found or incorrect endpoint)
+        console.log("User not found or endpoint incorrect.");
+      } else {
+        // Handle other status codes
+        console.error("Error deleting user:", response.statusText);
+      }
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error("Error deleting user:", error);
+     if (error.response.status === 401) {
+        setIsDeleteModalOpen(false);
+        setTokenExpired(true)
+      }
     }
   };
+  
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(
+          "https://localhost:7046/api/Role/GetAllRoles"
+        );
+        if (response.status === 401) {
+          setTokenExpired(true)
+        }
+        setRoles(response.data);
+      } catch (error) {
+        console.error("Error fetching roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
   return (
     <div>
+      {tokenExpired && <TokenExpired />}
       <section class="bg-gray-800 p-3 sm:p-5 antialiased rounded-2xl">
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
           <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-       
             <div class="overflow-x-auto">
               <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -171,8 +209,8 @@ const ManageUsers = () => {
                           Edit
                         </button>
                         <button
-        onClick={() => handleDeleteClick(user.id)}
-        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={() => handleDeleteClick(user.id)}
+                          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                         >
                           Delete
                         </button>
@@ -256,7 +294,6 @@ const ManageUsers = () => {
                         setUserData({ ...userData, surname: e.target.value })
                       }
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      
                     />
                   </div>
                   <div>
@@ -275,7 +312,6 @@ const ManageUsers = () => {
                         setUserData({ ...userData, email: e.target.value })
                       }
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      
                     />
                   </div>
                   <div>
@@ -291,45 +327,56 @@ const ManageUsers = () => {
                       id="phoneNumber"
                       value={userData.phoneNumber}
                       onChange={(e) =>
-                        setUserData({ ...userData, phoneNumber: e.target.value })
+                        setUserData({
+                          ...userData,
+                          phoneNumber: e.target.value,
+                        })
                       }
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      
                     />
                   </div>
                   <div>
                     <label
-                      for="status"
-                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      htmlFor="status"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Stauts
+                      Status
                     </label>
                     <select
                       id="status"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      value={userData.status}
+                      onChange={(e) =>
+                        setUserData({ ...userData, status: e.target.value })
+                      }
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     >
-                      <option selected="" value="active">
-                        Active
-                      </option>
+                      <option value="active">Active</option>
                       <option value="inactive">Inactive</option>
                     </select>
                   </div>
                   <div>
                     <label
-                      for="role"
-                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      htmlFor="role"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Role
                     </label>
                     <select
                       id="role"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      value={userData.role}
+                      onChange={(e) =>
+                        setUserData({ ...userData, roleId: e.target.value })
+                      }
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     >
-                      <option selected="" value="1">
-                        User
+                      <option value="" disabled>
+                        Select a role
                       </option>
-                      <option value="2">Admin</option>
-                      <option value="3">Chef</option>
+                      {roles.map((role) => (
+                        <option key={role.id} value={role.id}>
+                          {role.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>

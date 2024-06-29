@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Assuming you are using react-router for navigation
+import { useNavigate } from "react-router-dom";
 import Navbar from "../Navigation/Navbar";
 import Footer from "../Footer/Footer";
 import kosovo from "./kosovo.svg";
@@ -8,24 +8,49 @@ import albania from "./albania.svg";
 import macedonia from "./macedonia.svg";
 
 const MakeReservation = () => {
-  const [today, setToday] = useState("");
-  const [tomorrow, setTomorrow] = useState("");
+  const [restaurants, setRestaurants] = useState([]);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [selectedButton, setSelectedButton] = useState(null);
   const [hoveredButton, setHoveredButton] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [hoveredTime, setHoveredTime] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(""); // New state for selected date
-  const navigate = useNavigate(); // Hook for navigation
+  const [selectedDate, setSelectedDate] = useState("");
+  const [isGuest, setIsGuest] = useState(false);
+  const [guestEmail, setGuestEmail] = useState("");
+  const [reservationIdInput, setReservationIdInput] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userId = localStorage.getItem("id");
+
+    if (!userId) {
+      setIsGuest(true);
+    }
+    fetchRestaurants();
+  }, []);
+
+
+
+  const fetchRestaurants = async () => {
+    try {
+      const response = await axios.get(
+        "https://localhost:7046/api/Restaurant/GetAllRestaurants"
+      );
+      setRestaurants(response.data);
+    } catch (error) {
+      console.error("Error fetching restaurants:", error);
+    }
+  };
 
   const handleTimeMouseEnter = (time) => {
     setHoveredTime(time);
   };
-  
+
   const handleTimeMouseLeave = () => {
     setHoveredTime(null);
   };
-  
+
   const handleTimeClick = (time) => {
     setSelectedTime(time);
   };
@@ -42,32 +67,13 @@ const MakeReservation = () => {
     setSelectedButton(value);
   };
 
-  const handleRestaurantClick = (restaurant) => {
-    setSelectedRestaurant(restaurant);
+  const handleRestaurantClick = (restaurantId) => {
+    setSelectedRestaurant(restaurantId);
   };
 
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
   };
-
-  useEffect(() => {
-    const todayDate = new Date();
-    const dd = String(todayDate.getDate()).padStart(2, "0");
-    const mm = String(todayDate.getMonth() + 1).padStart(2, "0"); // January is 0!
-    const yyyy = todayDate.getFullYear();
-    setToday(`${dd}.${mm}.${yyyy}`);
-
-    const tomorrowDate = new Date(todayDate);
-    tomorrowDate.setDate(tomorrowDate.getDate() + 1);
-    const dd_tomorrow = String(tomorrowDate.getDate()).padStart(2, "0");
-    const mm_tomorrow = String(tomorrowDate.getMonth() + 1).padStart(2, "0");
-    const yyyy_tomorrow = tomorrowDate.getFullYear();
-    setTomorrow(`${dd_tomorrow}.${mm_tomorrow}.${yyyy_tomorrow}`);
-  }, []);
-
-  useEffect(() => {
-    document.title = 'Reserve';
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -77,74 +83,94 @@ const MakeReservation = () => {
       return;
     }
 
-    console.log(selectedDate); 
     const reservationData = {
-      selectedDate,
-      clientId,
-      restaurantId: selectedRestaurant, // Assuming restaurant ID is the same as selectedRestaurant
-      tableId: 21,
-      status: "active",
+      reservationDate: selectedDate,
+      hour: selectedTime,
       numberOfSeats: selectedButton,
-      hour: selectedTime
+      clientId,
+      restaurantId: selectedRestaurant,
+      tableId: 1,
+      status: "active",
     };
 
     try {
-      const response = await axios.post("https://localhost:7046/api/Reservation", reservationData);
+      const response = await axios.post(
+        "https://localhost:7046/api/Reservation",
+        reservationData
+      );
       console.log("Reservation successful:", response);
-      if (response.status===200) {
-        navigate("/my-reservations")
+      if (response.status === 200) {
+        navigate("/my-reservations");
       }
     } catch (error) {
       console.error("Error making reservation:", error);
     }
   };
 
+  const handleViewReservation = () => {
+    if (reservationIdInput.trim() !== "") {
+      navigate(`/reservations?id=${reservationIdInput}`);
+    }
+  };
+
   return (
-    <div className="bg-blue-900 flex justify-between flex-col text-white ">
+    <div className="bg-blue-900 flex flex-col text-white">
       <Navbar />
       <div className="container mx-auto flex flex-col justify-center my-8">
+        {isGuest ? (
+          <div className="mb-4 text-center">
+            <input
+              type="text"
+              placeholder="Enter reservation number"
+              value={reservationIdInput}
+              onChange={(e) => setReservationIdInput(e.target.value)}
+              className="w-full h-12 px-4 rounded-md bg-gray-800 text-white text-sm"
+            />
+            <button
+              type="button"
+              onClick={handleViewReservation}
+              className="mt-4 px-6 py-3 rounded-md bg-indigo-600 text-white font-bold hover:bg-indigo-700"
+            >
+              View Reservation
+            </button>
+          </div>
+        ) : (
+          <div className="mb-4 text-center">
+            <a href={`/my-reservations`}>View my reservations</a>
+          </div>
+        )}
         <form className="w-full max-w-sm mx-auto" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="time" className="block text-white font-bold mb-2">
               Select Restaurant:
             </label>
             <div className="flex w-full gap-4 ">
-              <button
-                type="button"
-                className={`px-4 py-2 rounded-md bg-gray-800 text-white w-1/3 ${
-                  selectedRestaurant === "2"
-                    ? "bg-green-800"
-                    : "hover:bg-green-700 active:bg-green-800"
-                }`}
-                onClick={() => handleRestaurantClick("2")}
-              >
-                Prishtina
-                <img src={kosovo} alt="" className="" />
-              </button>
-              <button
-                type="button"
-                className={`px-4 py-2 rounded-md bg-gray-800 text-white w-1/3 ${
-                  selectedRestaurant === "4"
-                    ? "bg-green-800"
-                    : "hover:bg-green-700 active:bg-green-800"
-                }`}
-                onClick={() => handleRestaurantClick("4")}
-              >
-                Tirana
-                <img src={albania} alt="" className="" />
-              </button>
-              <button
-                type="button"
-                className={`px-4 py-2 rounded-md bg-gray-800 text-white w-1/3 ${
-                  selectedRestaurant === "3"
-                    ? "bg-green-800"
-                    : "hover:bg-green-700 active:bg-green-800"
-                }`}
-                onClick={() => handleRestaurantClick("3")}
-              >
-                Skopje
-                <img src={macedonia} alt="" className="" />
-              </button>
+              {restaurants.map((restaurant) => (
+                <button
+                  key={restaurant.id}
+                  type="button"
+                  className={`px-4 py-2 rounded-md bg-gray-800 text-white w-1/3 ${
+                    selectedRestaurant === restaurant.id
+                      ? "bg-green-800"
+                      : "hover:bg-green-700 active:bg-green-800"
+                  }`}
+                  onClick={() => handleRestaurantClick(restaurant.id)}
+                >
+                  {restaurant.name}
+                  {(() => {
+                    switch (restaurant.name) {
+                      case "Prishtina":
+                        return <img src={kosovo} alt="Kosovo flag" />;
+                      case "Tirana":
+                        return <img src={albania} alt="Albania flag" />;
+                      case "Skopje":
+                        return <img src={macedonia} alt="Macedonia flag" />;
+                      default:
+                        return null;
+                    }
+                  })()}
+                </button>
+              ))}
             </div>
           </div>
           <div className="mb-4">
@@ -152,30 +178,13 @@ const MakeReservation = () => {
               Select Date:
             </label>
             <div className="flex w-full gap-4 ">
-              <button
-                type="button"
-                className="px-4 py-2 rounded-md bg-gray-800 text-white w-1/3"
-                onClick={() => setSelectedDate(today)}
-              >
-                Today
-                <br />
-                {today}
-              </button>
-              <button
-                type="button"
-                className="px-4 py-2 rounded-md bg-gray-800 text-white w-1/3"
-                onClick={() => setSelectedDate(tomorrow)}
-              >
-                Tomorrow
-                <br />
-                {tomorrow}
-              </button>
               <input
                 type="date"
                 id="date"
                 name="date"
-                className="w-1/3 h-28 px-1 rounded-md bg-gray-800 text-white text-sm"
+                value={selectedDate}
                 onChange={handleDateChange}
+                className="w-full h-28 px-1 rounded-md bg-gray-800 text-white text-sm p-4"
               />
             </div>
           </div>
@@ -189,9 +198,10 @@ const MakeReservation = () => {
                   key={hour}
                   type="button"
                   className={`px-4 py-2 rounded-md bg-gray-800 text-white ${
-                    (selectedTime && hour === selectedTime) || (hoveredTime && hour <= hoveredTime)
-                      ? 'bg-green-600'
-                      : 'hover:bg-green-600'
+                    (selectedTime && hour === selectedTime) ||
+                    (hoveredTime && hour <= hoveredTime)
+                      ? "bg-green-600"
+                      : "hover:bg-green-600"
                   }`}
                   onMouseEnter={() => handleTimeMouseEnter(hour)}
                   onMouseLeave={handleTimeMouseLeave}
@@ -226,6 +236,25 @@ const MakeReservation = () => {
               ))}
             </div>
           </div>
+          {isGuest && (
+            <div className="mb-4">
+              <label
+                htmlFor="guestEmail"
+                className="block text-white font-bold mb-2"
+              >
+                Guest Email:
+              </label>
+              <input
+                type="email"
+                id="guestEmail"
+                name="guestEmail"
+                className="w-full px-3 py-2 rounded-md bg-gray-800 text-white"
+                value={guestEmail}
+                onChange={(e) => setGuestEmail(e.target.value)}
+                required
+              />
+            </div>
+          )}
           <button
             type="submit"
             className="w-full px-4 py-2 rounded-md bg-indigo-600 text-white font-bold hover:bg-indigo-700"

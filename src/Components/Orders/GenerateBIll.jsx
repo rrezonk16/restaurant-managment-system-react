@@ -20,23 +20,16 @@ const GenerateBill = () => {
         const orderId = new URLSearchParams(window.location.search).get('id');
         if (!orderId) {
           navigate('/'); // Redirect if no order ID is found
+          return;
         }
 
         const orderResponse = await axios.get(`https://localhost:7046/api/Order/GetOrderByID/${orderId}`);
-        setOrderDetails({
-          "status": "active",
-          "menuItemIds": [7,8],
-          "tableId": 20,
-          "table": null,
-          "userID": 4,
-          "user": null,
-          "id": 2,
-          "createdAt": "2024-06-12T22:26:56.123",
-          "updatedtAt": "2024-06-12T22:26:56.123"
-        },);
-        console.log(orderDetails);
-        console.log(orderDetails.menuItemIds);
-        const menuItemPromises = orderDetails.menuItemIds.map(id =>
+        const orderData = orderResponse.data;
+        setOrderDetails(orderData);
+
+        const menuItemIds = JSON.parse(orderData.menuItemIds); // Parse the string array
+
+        const menuItemPromises = menuItemIds.map(id =>
           axios.get(`https://localhost:7046/api/MenuItem/GetMenuItemById/${id}`)
         );
         const menuItemResponses = await Promise.all(menuItemPromises);
@@ -47,7 +40,7 @@ const GenerateBill = () => {
     };
 
     fetchOrderDetails();
-  }, []);
+  }, [navigate]);
 
   const generatePDF = async () => {
     const doc = new jsPDF('p', 'pt');
@@ -83,6 +76,13 @@ const GenerateBill = () => {
       price: item.price,
       total: item.price
     }));
+    const totalAmount = rows.reduce((acc, row) => acc + row.total, 0);
+    rows.push({
+      description: 'Total',
+      quantity: '',
+      price: '',
+      total: totalAmount
+    });
     doc.autoTable({
       head: [columns.map(col => col.header)],
       body: rows.map(row => Object.values(row)),

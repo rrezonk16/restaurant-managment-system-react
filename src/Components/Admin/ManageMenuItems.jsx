@@ -57,18 +57,27 @@ const ManageMenuItems = () => {
         console.error("Error fetching Menus:", error);
       }
     };
+    const getToken = () => localStorage.getItem("token");
+    const token = getToken();
 
     const fetchChefs = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:7046/api/User/GetUsersByRoleId/3"
+          "https://localhost:7046/api/User/GetUsersByRoleId/3",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         console.log(response.data);
         setChefs(response.data);
       } catch (error) {
-        console.error("Error fetching Menus:", error);
+        console.error("Error fetching Chefs:", error);
       }
     };
+    
+    
 
     fetchMenus();
     fetchChefs();

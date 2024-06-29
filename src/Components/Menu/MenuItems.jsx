@@ -76,7 +76,7 @@ const MenuItems = () => {
             <div key={item.id} className="mb-4">
               <div className="flex justify-between border-b py-2">
                 <span>{item.name}</span>
-                <span>Price not specified</span>
+                <span>{item.price}</span>
               </div>
               <span className="text-gray-400">{item.ingredients}</span>
             </div>

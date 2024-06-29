@@ -14,6 +14,7 @@ import AddCode from "./Components/Authentication/AddCode";
 import AddNewPassword from "./Components/Authentication/AddNewPassword";
 import UserOrder from "./Components/Orders/UserOrder";
 import GenerateBill from "./Components/Orders/GenerateBIll";
+import ReservationDetails from "./Components/Reservations/ReservationDetails";
 
 const role = localStorage.getItem('role');
 
@@ -69,6 +70,10 @@ const routes = [
   {
     path: "/order-bill",
     element: <GenerateBill/>
+  },
+  {
+    path: "/reservations",
+    element: <ReservationDetails/>
   },
 ];
 
