@@ -68,7 +68,7 @@ namespace Restaurant.Controllers
         [Route("[action]")]
         void DeleteMenuItem(int id)
         {
-            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = "Server=.;Database=restaurant_roles;Integrated Security=True;TrustServerCertificate=True";
 
             string query = "Delete FROM MenuItems WHERE Id = @id";
 

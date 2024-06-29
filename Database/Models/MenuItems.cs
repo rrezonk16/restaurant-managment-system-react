@@ -15,6 +15,11 @@ namespace Database.Models
         public int Id { get; set; }
 
         [Required]
+
+        public decimal Price { get; set; }
+
+        [Required]
+
         public int MenuID { get; set; }
 
         [ForeignKey("Id")]

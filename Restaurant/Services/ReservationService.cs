@@ -4,9 +4,10 @@ using Database.Repository;
 using Microsoft.EntityFrameworkCore;
 using Restaurant.DTOs;
 using Restaurant.Mappings;
-using System.Reflection.Metadata.Ecma335;
-using ZstdSharp.Unsafe;
-using static Restaurant.Services.ReservationService;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Restaurant.Services
 {
@@ -55,6 +56,19 @@ namespace Restaurant.Services
             }
             return reservation;
         }
-    }
 
+        public async Task<IEnumerable<Reservation>> GetReservationsByUserIdAsync(int userId, CancellationToken cancellationToken)
+        {
+            return await _context.Reservation
+                                 .Where(r => r.ClientId == userId)
+                                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<IEnumerable<Reservation>> GetReservationsByRestaurantIdAsync(int restaurantId, CancellationToken cancellationToken)
+        {
+            return await _context.Reservation
+                                 .Where(r => r.RestaurantId == restaurantId)
+                                 .ToListAsync(cancellationToken);
+        }
+    }
 }

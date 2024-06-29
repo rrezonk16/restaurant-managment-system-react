@@ -28,7 +28,7 @@ namespace Restaurant.Controllers
         }
 
         [HttpGet]
-        [Authorize] // This endpoint requires authentication
+        [Authorize]
         [Route("[action]/{id}")]
         public async Task<Users> GetUser(int id, CancellationToken cancellationToken)
         {
@@ -36,7 +36,7 @@ namespace Restaurant.Controllers
         }
 
         [HttpGet]
-        [Authorize] // This endpoint requires authentication
+        [Authorize]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetUsersID(int id, CancellationToken cancellationToken)
         {
@@ -49,7 +49,7 @@ namespace Restaurant.Controllers
         }
 
         [HttpGet]
-        [Authorize] 
+        [Authorize]
         [Route("[action]")]
         public IEnumerable<Users> GetAllUsers()
         {
@@ -65,31 +65,69 @@ namespace Restaurant.Controllers
         }
 
         [HttpDelete("delete-user-by-id/{id}")]
-        [Authorize] // This endpoint requires authentication
-        public void DeleteUser(int id, CancellationToken cancellationToken)
+        [Authorize]
+        public IActionResult DeleteUser(int id, CancellationToken cancellationToken)
         {
-            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
-
-            string query = "Delete FROM Users WHERE id = @id";
-
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            try
             {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                string connectionString = "Server=.;Database=restaurant_roles;Integrated Security=True;TrustServerCertificate=True";
+                string query = "DELETE FROM Users WHERE Id = @id";
+
+                using (SqlConnection sqlConnection = new SqlConnection(connectionString))
                 {
-                    sqlCommand.Parameters.AddWithValue("@id", id);
-                    int rowsAffected = sqlCommand.ExecuteNonQuery();
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@id", id);
+                        int rowsAffected = sqlCommand.ExecuteNonQuery();
+
+                        if (rowsAffected == 0)
+                        {
+                            return NotFound(); // User with the given ID not found
+                        }
+
+                        return Ok(); // Successful deletion
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
 
+
         [HttpPut("update-user-by-id/{id}")]
-        [Authorize] // This endpoint requires authentication
-        public IActionResult UpdateUser(int id, [FromBody] UserDTO userDTO, CancellationToken cancellationToken)
+        [Authorize]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UserDTO userDTO, CancellationToken cancellationToken)
         {
-            var book = _userService.UpdateUser(id, userDTO);
-            return Ok(book);
+            var user = await _repository.Get(id, cancellationToken);
+            if (user == null)
+            {
+                return NotFound(); // User with the given ID not found
+            }
+
+            // Update properties that are allowed to be changed
+            user.Name = userDTO.Name;
+            user.Surname = userDTO.Surname;
+            user.Email = userDTO.Email;
+            user.RoleId = userDTO.RoleId;
+            user.PhoneNumber = userDTO.PhoneNumber; // Include PhoneNumber update
+
+            try
+            {
+                _repository.Update(user); // Update the user entity in the repository
+
+                await _repository.SaveAsync(cancellationToken); // Save changes asynchronously
+
+                return Ok(user); // Return the updated user object
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
 
         [AllowAnonymous]
         [HttpPost]
@@ -135,9 +173,8 @@ namespace Restaurant.Controllers
             return Ok(response);
         }
 
-        // New endpoint to get users by RoleId
         [HttpGet]
-        [Authorize] // This endpoint requires authentication
+        [Authorize]
         [Route("GetUsersByRoleId/{roleId}")]
         public IActionResult GetUsersByRoleId(int roleId)
         {
@@ -147,6 +184,26 @@ namespace Restaurant.Controllers
                 return NotFound();
             }
             return Ok(users);
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("GetUserRole")]
+        public IActionResult GetUserRole()
+        {
+            var claimsIdentity = User.Identity as ClaimsIdentity;
+            if (claimsIdentity == null)
+            {
+                return Unauthorized("No claims found");
+            }
+
+            var roleClaim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == "roleId");
+            if (roleClaim == null)
+            {
+                return NotFound("Role not found");
+            }
+
+            return Ok(new { roleId = roleClaim.Value });
         }
     }
 }

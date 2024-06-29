@@ -1,7 +1,6 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Models
 {
@@ -11,5 +10,7 @@ namespace Database.Models
         public string Name { get; set; }
         [Required]
         public string Status { get; set; }
+        [Required]
+        public string AllowedPages { get; set; } // Store as a comma-separated string
     }
 }

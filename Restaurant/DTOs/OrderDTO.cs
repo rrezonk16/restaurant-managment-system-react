@@ -18,8 +18,7 @@ namespace Restaurant.DTOs
         public string Status { get; set; }
         public int TableId { get; set; }
         public int userID { get; set; }
-        [NotMapped]
-        public ICollection<int> MenuItemIds { get; set; }
+        public string MenuItemIds { get; set; }
 
 
     }

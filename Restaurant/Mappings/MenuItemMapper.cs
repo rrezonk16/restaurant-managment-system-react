@@ -10,6 +10,7 @@ namespace Restaurant.Mappings
             return new MenuItems
             {
                 Name = menuItemsDTO.Name,
+                Price = menuItemsDTO.Price,
                 Ingredients = menuItemsDTO.Ingredients,
                 MenuID = menuItemsDTO.MenuID,                
             };

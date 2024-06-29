@@ -2,7 +2,6 @@
 using Database.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Restaurant.DTOs;
 using Restaurant.Services;
 
@@ -16,7 +15,7 @@ namespace Restaurant.Controllers
         private readonly IRepository<Reservation> _repository;
         private readonly IConfiguration _configuration;
 
-        public ReservationController(IRezervationService reservationService,IRepository<Reservation> repository,IConfiguration configuration)
+        public ReservationController(IRezervationService reservationService, IRepository<Reservation> repository, IConfiguration configuration)
         {
             _reservationService = reservationService;
             _repository = repository;
@@ -55,7 +54,7 @@ namespace Restaurant.Controllers
         [HttpDelete("delete-user-by-id/{id}")]
         public void DeleteReservationById(int id, CancellationToken cancellationToken)
         {
-            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = "Server=.;Database=restaurant_roles;Integrated Security=True;TrustServerCertificate=True";
 
             string query = "Delete FROM Reservation WHERE id = @id";
 
@@ -69,6 +68,19 @@ namespace Restaurant.Controllers
                 }
             }
         }
-    }
 
+        [HttpGet]
+        [Route("ByUser/{userId}")]
+        public async Task<IEnumerable<Reservation>> GetReservationsByUserId(int userId, CancellationToken cancellationToken)
+        {
+            return await _reservationService.GetReservationsByUserIdAsync(userId, cancellationToken);
+        }
+
+        [HttpGet]
+        [Route("ByRestaurant/{restaurantId}")]
+        public async Task<IEnumerable<Reservation>> GetReservationsByRestaurantId(int restaurantId, CancellationToken cancellationToken)
+        {
+            return await _reservationService.GetReservationsByRestaurantIdAsync(restaurantId, cancellationToken);
+        }
+    }
 }

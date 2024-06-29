@@ -34,13 +34,21 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+// Register services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
-builder.Services.AddScoped<IOrderService,OrderService>();
-builder.Services.AddScoped<IMenuItems,MenuItemsService>();
-builder.Services.AddScoped<IRoleService,RoleService>();
-builder.Services.AddScoped<IRezervationService,ReservationService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IMenuItems, MenuItemsService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRezervationService, ReservationService>();
+
+// Register ITableService
+builder.Services.AddScoped<ITableService, TableService>();
+
+// Register Workplace Service and Repository
+builder.Services.AddScoped<IWorkplaceService, WorkplaceService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -67,8 +75,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors(MyAllowSpecificOrigins); // Enable CORS
-app.UseAuthentication(); // Add this line
+app.UseCors(MyAllowSpecificOrigins);
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

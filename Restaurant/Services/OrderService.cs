@@ -3,6 +3,8 @@ using Database.Models;
 using Database.Repository;
 using Restaurant.DTOs;
 using Restaurant.Mappings;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Restaurant.Services
 {
@@ -12,32 +14,37 @@ namespace Restaurant.Services
         private readonly ILogger<OrderDTO> _logger;
         private readonly ApplicationDbContext _context;
 
-        public OrderService(IRepository<Orders> repository,ILogger<OrderDTO> logger,ApplicationDbContext applicationDbContext)
+        public OrderService(IRepository<Orders> repository, ILogger<OrderDTO> logger, ApplicationDbContext applicationDbContext)
         {
             _repository = repository;
             _logger = logger;
             _context = applicationDbContext;
         }
 
-        public async Task RegisterOrder(OrderDTO orderDTO, CancellationToken cancellation)
+        public async Task<int> RegisterOrder(OrderDTO orderDTO, CancellationToken cancellation)
         {
             orderDTO.Status = "active";
             Orders registeredOrder = OrderMapper.OrderDTOToModel(orderDTO);
             _repository.Add(registeredOrder);
             await _repository.SaveAsync(cancellation);
+            return registeredOrder.Id;
         }
 
-        public Orders UpdateOrders(int Id, OrderDTO orderDTO)
+        public async Task<Orders?> UpdateOrders(int id, OrderDTO orderDTO, CancellationToken cancellationToken)
         {
-            var order = _context.Set<Orders>().FirstOrDefault(n => n.Id == Id);
-            if(order != null)
+            var order = await _repository.Get(id, cancellationToken);
+            if (order == null)
             {
-                order.Status = orderDTO.Status;
-                order.TableId = orderDTO.TableId;
-                order.MenuItemIds = orderDTO.MenuItemIds;
-                order.userID = orderDTO.userID;
-                _repository.Save();
+                return null;
             }
+
+            order.Status = orderDTO.Status;
+            order.TableId = orderDTO.TableId;
+            order.MenuItemIds = orderDTO.MenuItemIds;
+            order.userID = orderDTO.userID;
+
+            _repository.Update(order);
+            await _repository.SaveAsync(cancellationToken);
             return order;
         }
     }

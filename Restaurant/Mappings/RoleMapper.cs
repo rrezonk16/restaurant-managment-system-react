@@ -1,8 +1,5 @@
 ﻿using Database.Models;
 using Restaurant.DTOs;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Restaurant.Mappings
 {
@@ -13,9 +10,19 @@ namespace Restaurant.Mappings
             return new Roles
             {
                 Name = roleDTO.Name,
-                Status = roleDTO.Status
+                Status = roleDTO.Status,
+                AllowedPages = roleDTO.AllowedPages // Directly map the string
+            };
+        }
+
+        public static RoleDTO ModelToRoleDTO(Roles role)
+        {
+            return new RoleDTO
+            {
+                Name = role.Name,
+                Status = role.Status,
+                AllowedPages = role.AllowedPages // Directly map the string
             };
         }
     }
 }
-

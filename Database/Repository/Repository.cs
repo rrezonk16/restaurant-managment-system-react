@@ -1,10 +1,9 @@
-﻿using Database.Context;
-using Database.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Database.Context;
+using Database.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Database.Repository
 {
@@ -46,6 +45,11 @@ namespace Database.Repository
             return _context.Set<T>().AsQueryable();
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken token)
+        {
+            return await _context.Set<T>().ToListAsync(token);
+        }
+
         public async Task SaveAsync(CancellationToken token)
         {
             await _context.SaveChangesAsync(token);
@@ -65,6 +69,13 @@ namespace Database.Repository
         {
             return await _context.Set<MenuItems>()
                 .Where(mi => mi.MenuID == menuID)
+                .ToListAsync(token);
+        }
+
+        public async Task<IEnumerable<Table>> GetTablesByRestaurantId(int restaurantId, CancellationToken token)
+        {
+            return await _context.Set<Table>()
+                .Where(t => t.RestaurantID == restaurantId)
                 .ToListAsync(token);
         }
     }

@@ -8,8 +8,8 @@ namespace Database.Models
     {
         [Required]
         public string Status { get; set; }
-        [NotMapped]
-        public ICollection<int> MenuItemIds { get; set; }
+        public string MenuItemIds { get; set; }
+
         public int TableId { get; set; }
         public Table Table { get; set; }
 

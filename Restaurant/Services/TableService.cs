@@ -55,5 +55,14 @@ namespace Restaurant.Services
             }
             return table;
         }
+
+        public async Task<IEnumerable<TableDTO>> GetTablesByRestaurantId(int restaurantId, CancellationToken token)
+        {
+            var tables = await _repository.GetTablesByRestaurantId(restaurantId, token);
+            return tables.Select(TableMapper.ModelToTableDTO).ToList();
+        }
+
+        
+
     }
 }

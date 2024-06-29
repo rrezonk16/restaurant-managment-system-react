@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Restaurant.DTOs;
 using Restaurant.Services;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Restaurant.Controllers
 {
@@ -14,7 +17,7 @@ namespace Restaurant.Controllers
         private readonly IRepository<Table> _repository;
         private readonly ITableService _tableService;
 
-        public TableController(IRepository<Table> repository,ITableService tableService)
+        public TableController(IRepository<Table> repository, ITableService tableService)
         {
             _repository = repository;
             _tableService = tableService;
@@ -36,7 +39,7 @@ namespace Restaurant.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> AddTabale(TableDTO tableDTO, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddTable(TableDTO tableDTO, CancellationToken cancellationToken)
         {
             await _tableService.AddTable(tableDTO, cancellationToken);
             return Ok();
@@ -45,9 +48,9 @@ namespace Restaurant.Controllers
         [HttpDelete("delete-table-by-id/{id}")]
         public void DeleteTable(int id)
         {
-            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = "Server=.;Database=restaurant_roles;Integrated Security=True;TrustServerCertificate=True";
 
-            string query = "Delete FROM Tables WHERE Id = @id";
+            string query = "Delete FROM Table WHERE Id = @id";
 
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
@@ -66,6 +69,14 @@ namespace Restaurant.Controllers
         {
             var menu = _tableService.UpdateTable(id, tableDTO);
             return Ok(menu);
+        }
+
+        [HttpGet]
+        [Route("GetTablesByRestaurantId/{restaurantId}")]
+        public async Task<IActionResult> GetTablesByRestaurantId(int restaurantId, CancellationToken token)
+        {
+            var tables = await _tableService.GetTablesByRestaurantId(restaurantId, token);
+            return Ok(tables);
         }
     }
 }

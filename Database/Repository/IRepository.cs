@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Database.Models;
+﻿using Database.Models;
 
 namespace Database.Repository
 {
@@ -9,12 +6,14 @@ namespace Database.Repository
     {
         Task<T?> Get(int id, CancellationToken token);
         IQueryable<T> GetAll();
-        IQueryable<T> GetQuery(); // Method to return a queryable collection
+        Task<IEnumerable<T>> GetAllAsync(CancellationToken token);
+        IQueryable<T> GetQuery();
         void Add(T entity);
-        void Update(T entity);
+        void Update(T entity); // Update to match your current repository implementation
         void Delete(int id, CancellationToken token);
         Task SaveAsync(CancellationToken token);
         void Save();
-        Task<IEnumerable<MenuItems>> GetMenuItemsByMenuID(int menuID, CancellationToken token); // New method
+        Task<IEnumerable<MenuItems>> GetMenuItemsByMenuID(int menuID, CancellationToken token);
+        Task<IEnumerable<Table>> GetTablesByRestaurantId(int restaurantId, CancellationToken token);
     }
 }

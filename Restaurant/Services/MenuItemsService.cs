@@ -38,6 +38,8 @@ namespace Restaurant.Services
                 menuItem.Ingredients = menuItemDTO.Ingredients;
                 menuItem.Status = menuItemDTO.Status;
                 menuItem.MenuID = menuItemDTO.MenuID;
+                menuItem.Price = menuItemDTO.Price;
+
                 _repository.Save();
             }
             return menuItem;

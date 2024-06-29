@@ -1,12 +1,4 @@
-﻿using Database.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Restaurant.DTOs
 {
@@ -16,6 +8,7 @@ namespace Restaurant.DTOs
         public string Name { get; set; }
         [Required]
         public string Status { get; set; }
+        [Required]
+        public string AllowedPages { get; set; } // Store as a comma-separated string
     }
 }
- 

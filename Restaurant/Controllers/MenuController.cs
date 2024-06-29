@@ -40,7 +40,7 @@ namespace Restaurant.Controllers
         [HttpDelete("delete-menu-by-id/{id}")]
         public void DeleteMenu(int id)
         {
-            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
+            string connectionString = "Server=.;Database=restaurant_roles;Integrated Security=True;TrustServerCertificate=True";
 
             string query = "Delete FROM Menu WHERE id = @id";
 

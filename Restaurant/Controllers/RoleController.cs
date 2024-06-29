@@ -1,7 +1,9 @@
-﻿using Database.Models;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Database.Models;
 using Database.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Restaurant.DTOs;
 using Restaurant.Services;
 
@@ -43,22 +45,16 @@ namespace Restaurant.Controllers
         }
 
         [HttpDelete("delete-role-by-id/{id}")]
-        public void DeleteTable(int id)
+        public async Task<IActionResult> DeleteRole(int id, CancellationToken token)
         {
-            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
-
-            string query = "Delete FROM Roles WHERE Id = @id";
-
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            var role = await _repository.Get(id, token);
+            if (role != null)
             {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
-                {
-                    sqlCommand.Parameters.AddWithValue("@id", id);
-                    int rowsAffected = sqlCommand.ExecuteNonQuery();
-                    sqlConnection.Close();
-                }
+                _repository.Delete(id, token);
+                await _repository.SaveAsync(token);
+                return Ok();
             }
+            return NotFound();
         }
 
         [HttpPut("update-role-by-id/{id}")]

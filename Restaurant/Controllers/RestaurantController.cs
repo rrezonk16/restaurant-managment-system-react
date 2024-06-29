@@ -3,6 +3,9 @@ using Database.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.DTOs;
 using Restaurant.Services;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Restaurant.Controllers
 {
@@ -13,7 +16,7 @@ namespace Restaurant.Controllers
         private readonly IRepository<Restaurants> _repository;
         private readonly IRestaurantService _restaurantService;
 
-        public RestaurantController(IRepository<Restaurants> repository,IRestaurantService restaurantService)
+        public RestaurantController(IRepository<Restaurants> repository, IRestaurantService restaurantService)
         {
             _repository = repository;
             _restaurantService = restaurantService;
@@ -24,6 +27,13 @@ namespace Restaurant.Controllers
         public async Task<Restaurants> GetRestaurant(int id, CancellationToken token)
         {
             return await _repository.Get(id, token);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IEnumerable<Restaurants>> GetAllRestaurants(CancellationToken token)
+        {
+            return await _repository.GetAllAsync(token);
         }
 
         [HttpPost]

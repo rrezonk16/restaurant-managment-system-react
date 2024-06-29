@@ -1,17 +1,12 @@
-﻿using Database.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Restaurant.DTOs
 {
     public class TableDTO
     {
+        [Required]
+        public int TableID { get; set; } // Add this property
+
         [Required]
         public int RestaurantID { get; set; }
 
@@ -22,4 +17,3 @@ namespace Restaurant.DTOs
         public int NumberOfSeats { get; set; }
     }
 }
- 

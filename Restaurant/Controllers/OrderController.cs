@@ -1,12 +1,10 @@
 ﻿using Database.Models;
 using Database.Repository;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restaurant.DTOs;
 using Restaurant.Services;
-using ZstdSharp.Unsafe;
-using Microsoft.Data.SqlClient;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Restaurant.Controllers
 {
@@ -16,7 +14,8 @@ namespace Restaurant.Controllers
     {
         private readonly IRepository<Orders> _repository;
         private readonly IOrderService _orderService;
-        public OrderController(IRepository<Orders> repository,IOrderService  orderService)
+
+        public OrderController(IRepository<Orders> repository, IOrderService orderService)
         {
             _repository = repository;
             _orderService = orderService;
@@ -24,51 +23,62 @@ namespace Restaurant.Controllers
 
         [HttpGet]
         [Route("[action]/{id}")]
-        public async Task<Orders> GetOrderByID(int id, CancellationToken token)
+        public async Task<ActionResult<Orders>> GetOrderByID(int id, CancellationToken token)
         {
-            return await _repository.Get(id, token);
+            var order = await _repository.Get(id, token);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            return Ok(order);
         }
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> RegisterOrder(OrderDTO orderDTO,CancellationToken cancellationToken)
+        public async Task<IActionResult> RegisterOrder(OrderDTO orderDTO, CancellationToken cancellationToken)
         {
-            await _orderService.RegisterOrder(orderDTO,cancellationToken);
-            return Ok();
+            int orderId = await _orderService.RegisterOrder(orderDTO, cancellationToken);
+            return Ok(new { OrderId = orderId });
         }
 
         [HttpDelete("delete-order-by-id/{id}")]
-        public void DeleteOrder(int id)
+        public async Task<IActionResult> DeleteOrder(int id, CancellationToken cancellationToken)
         {
-            string connectionString = "Server=.;Database=restaurant;Integrated Security=True;TrustServerCertificate=True";
-
-            string query = "Delete FROM Orders WHERE Id = @id";
-
-            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            var order = await _repository.Get(id, cancellationToken);
+            if (order == null)
             {
-                sqlConnection.Open();
-                using (SqlCommand sqlCommand = new SqlCommand(query, sqlConnection))
-                {
-                    sqlCommand.Parameters.AddWithValue("@id", id);
-                    int rowsAffected = sqlCommand.ExecuteNonQuery();
-                    sqlConnection.Close();
-                }
+                return NotFound();
             }
+
+            _repository.Delete(id, cancellationToken);
+            await _repository.SaveAsync(cancellationToken);
+            return NoContent();
         }
 
         [HttpGet]
         [Route("[action]")]
-        public IEnumerable<Orders> GetOrders()
+        public async Task<ActionResult<IEnumerable<Orders>>> GetOrders(CancellationToken cancellationToken)
         {
-            return _repository.GetAll();
+            var orders = await _repository.GetAllAsync(cancellationToken);
+            return Ok(orders);
         }
-        
+
         [HttpPut("update-order-by-id/{id}")]
-        public IActionResult UpadateOrder(int id, [FromBody] OrderDTO orderDTO)
+        public async Task<IActionResult> UpdateOrder(int id, [FromBody] OrderDTO orderDTO, CancellationToken cancellationToken)
         {
-            var order = _orderService.UpdateOrders(id, orderDTO);
-            return Ok(order);
+            try
+            {
+                var updatedOrder = await _orderService.UpdateOrders(id, orderDTO, cancellationToken);
+                if (updatedOrder == null)
+                {
+                    return NotFound();
+                }
+                return Ok(updatedOrder);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
         }
     }
 }
- 
